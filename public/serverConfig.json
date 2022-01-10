@@ -1,0 +1,9 @@
+{
+  "Version": "1.0.0",
+  "Name": "Appointment_System",
+  "FixedHeader": true,
+  "HiddenSideBar": false,
+  "KeepAlive": true,
+  "Layout": "vertical",
+  "HideTabs": false
+}

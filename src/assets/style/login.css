@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body {
+  @apply w-full h-full; }
+
+#app {
+  @apply w-full h-full; }
+
+.el-dropdown-menu {
+  background: var(--el-dropdown-menu-background-color) !important; }
+
+.login-contain {
+  @apply w-full h-full flex flex-col flex-1 justify-center items-center transition-all;
+  background-color: #2d3a4b; }
+  .login-contain .login-box {
+    @apply w-2/4 h-4/5 flex flex-col items-center; }
+    .login-contain .login-box .logo-contain {
+      @apply w-auto h-auto; }
+      .login-contain .login-box .logo-contain .el-image {
+        @apply rounded-full w-44 h-44; }
+        .login-contain .login-box .logo-contain .el-image:hover {
+          animation: pulse;
+          animation-duration: .25s;
+          cursor: pointer; }
+    .login-contain .login-box .input-contain {
+      @apply w-full h-max rounded-3xl overflow-hidden shadow-2xl;
+      background-color: rgba(255, 255, 255, 0.75); }
+      .login-contain .login-box .input-contain .title-contain {
+        @apply w-full h-auto py-2 font-sans font-bold text-3xl  tracking-wider text-center;
+        color: #fff; }
+        .login-contain .login-box .input-contain .title-contain:hover {
+          cursor: default; }
+      .login-contain .login-box .input-contain .form-contain {
+        @apply w-full;
+        height: calc(100% - 52px); }
+        .login-contain .login-box .input-contain .form-contain .selector-contain {
+          @apply w-max h-auto mx-auto py-3; }
+        .login-contain .login-box .input-contain .form-contain .userform {
+          @apply mx-auto my-8;
+          width: 67.6%; }
+          .login-contain .login-box .input-contain .form-contain .userform .el-input {
+            width: 277px; }
+        .login-contain .login-box .input-contain .form-contain .codeform {
+          @apply mx-auto my-8 w-max h-auto text-center text-gray-500; }
+          .login-contain .login-box .input-contain .form-contain .codeform .el-image {
+            @apply w-48 h-48; }
+          .login-contain .login-box .input-contain .form-contain .codeform p {
+            @apply select-none; }
+        .login-contain .login-box .input-contain .form-contain .btnContain {
+          @apply mx-auto w-max h-auto pb-5; }
+          .login-contain .login-box .input-contain .form-contain .btnContain:hover {
+            animation: pulse .5s; }
+
+/*.accountAnime-enter-active,.mobileAnime-enter-active,.codeAnime-enter-active,.buttonAnime-enter-active{
+  animation: flipInX .65s;
+}
+
+.accountAnime-leave-active,.mobileAnime-leave-active,.codeAnime-leave-active,.buttonAnime-leave-active{
+  display: none;
+}*/
+.loginAnime-enter-active {
+  animation: flipInX .6s; }
+
+.loginAnime-leave-active {
+  display: none; }
+
+/*# sourceMappingURL=login.css.map */

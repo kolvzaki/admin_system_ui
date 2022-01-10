@@ -1,0 +1,68 @@
+Arguments: 
+  D:\Environment\node\node.exe D:\Environment\node_global\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  D:\WorkPlace\web\appointment_system\node_modules\.bin;D:\Environment\ruby\Ruby30-x64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\Environment\jdk\16\bin;D:\Environment\maven\apache-maven-3.6.3\bin;D:\Environment\mysql\mysql-8.0.27-winx64\bin;%ERLANG_PATH%\bin;D:\Environment\golang\bin;D:\Environment\python;D:\Environment\python\Scripts;D:\Environment\redis;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;D:\Environment\node\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;D:\Environment\node_global;C:\Users\Administrator\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.13.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile 'D:\Environment\yarn\cache\v6\npm-estraverse-4.3.0-398ad3f3c5a24948be7725e83d11a7de28cdbd1d-integrity\node_modules\estraverse\.jshintrc' -> 'D:\WorkPlace\web\appointment_system\node_modules\@typescript-eslint\experimental-utils\node_modules\estraverse\.jshintrc'
+
+npm manifest: 
+  {
+    "name": "appointment_system",
+    "version": "0.0.0",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc --noEmit && vite build",
+      "preview": "vite preview"
+    },
+    "dependencies": {
+      "@element-plus/icons-vue": "^0.2.4",
+      "@iconify/iconify": "^2.1.0",
+      "@iconify/vue": "^3.1.1",
+      "animate.css": "^4.1.1",
+      "axios": "^0.24.0",
+      "element-plus": "^1.2.0-beta.6",
+      "pinia": "^2.0.6",
+      "sass": "^1.45.0",
+      "vue": "^3.2.25",
+      "vue-router": "4"
+    },
+    "devDependencies": {
+      "@iconify/json": "^1.1.443",
+      "@types/node": "^17.0.0",
+      "@typescript-eslint/eslint-plugin": "^5.7.0",
+      "@typescript-eslint/parser": "^5.7.0",
+      "@vitejs/plugin-vue": "^2.0.0",
+      "autoprefixer": "^10.4.0",
+      "eslint": "^8.4.1",
+      "eslint-config-prettier": "^8.3.0",
+      "eslint-plugin-prettier": "^4.0.0",
+      "eslint-plugin-vue": "^8.2.0",
+      "postcss": "^8.4.5",
+      "prettier": "^2.5.1",
+      "tailwindcss": "^3.0.5",
+      "typescript": "^4.4.4",
+      "unplugin-auto-import": "^0.5.3",
+      "unplugin-vue-components": "^0.17.9",
+      "vite": "^2.7.2",
+      "vite-plugin-purge-icons": "^0.7.0",
+      "vue-eslint-parser": "^8.0.1",
+      "vue-tsc": "^0.29.8"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

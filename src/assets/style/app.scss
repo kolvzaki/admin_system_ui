@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "global";
+
+.el-dropdown-menu{
+  background: var(--el-dropdown-menu-background-color) !important;
+
+}

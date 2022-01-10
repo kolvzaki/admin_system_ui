@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body {
+  @apply w-full h-full; }
+
+#app {
+  @apply w-full h-full; }
+
+.el-dropdown-menu {
+  background: var(--el-dropdown-menu-background-color) !important; }
+
+.sidebar-logo-contain {
+  @apply h-14 w-full flex items-center;
+  background: var(--el-logo-bg-color); }
+  .sidebar-logo-contain .logo-contain {
+    @apply inline-block w-max h-max p-3; }
+    .sidebar-logo-contain .logo-contain .el-image {
+      width: 36px;
+      height: 36px; }
+  .sidebar-logo-contain .title-contain {
+    @apply h-max w-max inline-block text-white select-none text-lg; }
+
+.titleAnime-enter-active {
+  animation: flipInX 1.2s; }
+
+.titleAnime-leave-active {
+  animation: flipOutX .2s; }
+
+.sidemenu {
+  background: var(--el-background-color-base); }
+
+.sidemenu:not(.el-menu--collapse) {
+  width: 221px;
+  height: 100vh; }
+  .sidemenu:not(.el-menu--collapse) .el-menu-item, .sidemenu:not(.el-menu--collapse) .el-sub-menu {
+    @apply text-base tracking-wider; }
+
+::v-deep(.el-menu--collapse) {
+  height: 100vh; }
+
+/*# sourceMappingURL=sidebar.css.map */

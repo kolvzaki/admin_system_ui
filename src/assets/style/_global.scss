@@ -1,0 +1,14 @@
+html,body{
+  //tailwind提供的原子类
+  @apply w-full h-full;
+}
+
+#app{
+  @apply w-full h-full;
+}
+
+$color-primary: #007aff;
+$bg: #2d3a4b;
+$text: #fff;
+
+

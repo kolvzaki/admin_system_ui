@@ -1,0 +1,78 @@
+@import "app";
+
+.login-contain{
+  @apply w-full h-full flex flex-col flex-1 justify-center items-center transition-all;
+  background-color: $bg;
+
+  .login-box{
+    @apply w-2/4 h-4/5 flex flex-col items-center;
+    .logo-contain{
+      @apply w-auto h-auto;
+      .el-image{
+        @apply rounded-full w-44 h-44;
+        &:hover{
+          animation: pulse;
+          animation-duration: .25s;
+          cursor: pointer;
+        }
+      }
+    }
+    .input-contain{
+      @apply w-full h-max rounded-3xl overflow-hidden shadow-2xl;
+      background-color: rgba(255,255,255,.75);
+      .title-contain{
+        @apply w-full h-auto py-2 font-sans font-bold text-3xl  tracking-wider text-center;
+        color: #fff;
+        &:hover{
+          cursor: default;
+        }
+      }
+      .form-contain{
+        @apply w-full;
+        height: calc(100% - 52px);
+        .selector-contain{
+          @apply w-max h-auto mx-auto py-3;
+        }
+        .userform{
+          @apply mx-auto my-8;
+          width: 67.6%;
+          .el-input{
+            width: 277px;
+          }
+        }
+        .codeform{
+          @apply mx-auto my-8 w-max h-auto text-center text-gray-500;
+          .el-image{
+            @apply w-48 h-48
+          }
+          p{
+            @apply select-none;
+          }
+        }
+        .btnContain{
+          @apply mx-auto w-max h-auto pb-5;
+          &:hover{
+            animation: pulse .5s;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*.accountAnime-enter-active,.mobileAnime-enter-active,.codeAnime-enter-active,.buttonAnime-enter-active{
+  animation: flipInX .65s;
+}
+
+.accountAnime-leave-active,.mobileAnime-leave-active,.codeAnime-leave-active,.buttonAnime-leave-active{
+  display: none;
+}*/
+
+.loginAnime-enter-active{
+  animation: flipInX .6s;
+}
+
+.loginAnime-leave-active{
+  display: none;
+}
+
