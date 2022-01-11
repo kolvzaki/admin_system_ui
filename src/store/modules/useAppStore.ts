@@ -3,12 +3,14 @@ import useUserStore from "@/store/modules/useUserStore";
 import {useI18n} from "vue-i18n";
 import {Local} from "@/utils/storage";
 import theme_default from "@/assets/style/theme/default.scss"
+import screenfull from "screenfull";
 
 // @ts-ignore
 const useAppStore = defineStore({
     id: 'appStore',
     state:()=>({
         isCollapse: false,
+        isScreenFull: false,
         showSettings: false,
         lang: Local.getItem('app-language') || 'zh',
         theme: 'default',
@@ -39,6 +41,10 @@ const useAppStore = defineStore({
       setTheme(v:string){
         this.$state.theme = v
         Local.setItem('app-theme',v)
+      },
+      setScreenFull(v:boolean){
+        this.$state.isScreenFull = v
+        Local.setItem('is-screen-full',this.$state.isScreenFull)
       }
     },
     getters:{
@@ -60,7 +66,9 @@ const useAppStore = defineStore({
       getAppThemes:(state):string[]|undefined=>{
         return state.themes
       },
-
+      getScreenFull:(state):boolean=>{
+        return state.isScreenFull
+      }
 
     }
 })

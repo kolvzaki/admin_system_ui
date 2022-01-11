@@ -21,7 +21,8 @@ export default {
   },
   navbar:{
     langSelect: 'Language Select',
-    skinSetting: 'Skin Setting'
+    skinSetting: 'Skin Setting',
+    screenFull: 'Full Screen',
   },
   skin:{
     default: 'Default',

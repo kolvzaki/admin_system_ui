@@ -9,6 +9,7 @@
 
   import {i18nNavBar} from "@/utils/i18n";
   import SkinSetting from "@/components/skinSetting.vue";
+  import ScreenFull from "@/components/screenFull.vue";
 
   const appStore = useAppStore()
   const refStore = storeToRefs(appStore)
@@ -37,6 +38,9 @@
     </el-tooltip>
     <el-tooltip :content="i18nNavBar('skinSetting')" >
       <skin-setting class="setting-content"></skin-setting>
+    </el-tooltip>
+    <el-tooltip :content="i18nNavBar('screenFull')">
+      <screen-full class="setting-content"/>
     </el-tooltip>
   </div>
 
@@ -82,12 +86,15 @@
     @apply  w-full ;
   }
   .setting-container{
-    @apply flex items-center  h-full;
-    width: 300px;
+    @apply flex items-center h-full w-max;
+
     .setting-content{
       @apply ml-5;
       width: 32px;
       height: 32px;
+      &:hover{
+        animation: pulse .5s;
+      }
     }
   }
 }

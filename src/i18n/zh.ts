@@ -20,7 +20,8 @@ export default {
   },
   navbar:{
     langSelect: '语言切换',
-    skinSetting: '皮肤设置'
+    skinSetting: '皮肤设置',
+    screenFull: '全屏',
   },
   skin:{
     default: '默认',
