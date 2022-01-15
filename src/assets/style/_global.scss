@@ -11,4 +11,23 @@ $color-primary: #007aff;
 $bg: #2d3a4b;
 $text: #fff;
 
+.el-dropdown-menu {
+  background: var(--el-dropdown-menu-background-color) !important;
+}
+.el-select-dropdown__wrap{
+  background: var(--el-dropdown-menu-background-color);
+  color: #fff;
+  .el-select-dropdown__item .selected{
 
+  }
+  .el-select-dropdown__item:hover{
+    background: var(--el-background-color-base);
+    color: var(--el-text-color-primary);
+  }
+  .el-select-dropdown__item.hover{
+    background: var(--el-background-color-base);
+    color: var(--el-text-color-primary);
+  }
+
+
+}

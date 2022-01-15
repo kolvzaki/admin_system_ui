@@ -10,6 +10,7 @@ export default{
     '--el-background-color-base': '#483D8B',
     '--el-dropdown-menu-background-color':'#f0f0f0',
 
+
     '--el-color-white': '#483D8B', //el-menu-item el-dropdown el-tags el-setting
     '--el-color-black': '#000000',
     '--el-color-primary': '#ffffff',// el-dropdown-item:hover 字体颜色
@@ -37,7 +38,7 @@ export default{
     '--el-color-info': '#909399',
     '--el-color-info-light': '#e9e9eb',
     '--el-color-info-lighter': '#f4f4f5',
-    '--el-text-color-primary': '#fff', //el-tags el-menu-item
+    '--el-text-color-primary': '#ffffff', //el-tags el-menu-item el-select-dropdown-menu-item
     '--el-text-color-regular': '#000000',
     '--el-text-color-secondary': '#909399',
     '--el-text-color-placeholder': '#c0c4cc',

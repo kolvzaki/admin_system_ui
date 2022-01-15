@@ -10,6 +10,7 @@
   import {i18nNavBar} from "@/utils/i18n";
   import SkinSetting from "@/components/skinSetting.vue";
   import ScreenFull from "@/components/screenFull.vue";
+  import HeaderSearch from "@/components/headerSearch.vue";
 
   const appStore = useAppStore()
   const refStore = storeToRefs(appStore)
@@ -33,6 +34,11 @@
 
 
   <div class="setting-container">
+
+    <el-tooltip :content="i18nNavBar('headerSearch')">
+      <header-search class="setting-content"></header-search>
+    </el-tooltip>
+
     <el-tooltip :content="i18nNavBar('langSelect')" >
       <lang-select class="setting-content"> </lang-select>
     </el-tooltip>
@@ -86,16 +92,19 @@
     @apply  w-full ;
   }
   .setting-container{
-    @apply flex items-center h-full w-max;
+    @apply flex items-center h-max w-max;
 
     .setting-content{
-      @apply ml-5;
-      width: 32px;
-      height: 32px;
+      @apply mr-5 w-max inline-block;
+      ::v-deep(.el-icon){
+        width: 32px;
+        height: 32px;
+      }
       &:hover{
         animation: pulse .5s;
       }
     }
+
   }
 }
 

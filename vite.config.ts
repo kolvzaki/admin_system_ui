@@ -36,13 +36,7 @@ export default defineConfig({
         ],
     }),
   ],
-  css:{
-    preprocessorOptions:{
-        scss:{
 
-        }
-    }
-  },
   server:{
     strictPort: true,
     open: true,

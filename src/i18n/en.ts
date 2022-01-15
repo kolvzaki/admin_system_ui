@@ -23,6 +23,7 @@ export default {
     langSelect: 'Language Select',
     skinSetting: 'Skin Setting',
     screenFull: 'Full Screen',
+    headerSearch: 'System Search'
   },
   skin:{
     default: 'Default',

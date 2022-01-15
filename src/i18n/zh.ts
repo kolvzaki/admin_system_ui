@@ -22,6 +22,7 @@ export default {
     langSelect: '语言切换',
     skinSetting: '皮肤设置',
     screenFull: '全屏',
+    headerSearch: '系统检索'
   },
   skin:{
     default: '默认',

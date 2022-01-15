@@ -2,7 +2,7 @@ export default {
   'dark': {
     '--el-logo-bg-color': '#434757', // 自设变量，sidebar背景色绑定的变量
 
-    '--el-breadcrumb-text-color':'#000',
+    '--el-breadcrumb-text-color':'#000000',
     '--el-breadcrumb-hover-text-color':'#FF9966',
 
     '--el-navbar-background-color':'#6F7691',
@@ -11,6 +11,7 @@ export default {
 
     '--el-hamburger-hover-color':'#556699',
     '--el-dropdown-menu-background-color':'#777777',
+
 
     "--el-color-primary": "#ffffff", // 主题色
     "--el-background-color-base": "#01305F", // 基础背景色

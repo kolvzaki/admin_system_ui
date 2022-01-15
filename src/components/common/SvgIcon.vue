@@ -46,6 +46,7 @@ const iconName = computed(()=> `#icon-${props.icon}`)
 .sidebar-icon{
   @apply w-5 h-5;
   margin-right: 10px;
+
 }
 .navbar-icon{
   @apply inline-block ;

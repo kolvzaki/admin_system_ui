@@ -44,5 +44,6 @@ onUnmounted(()=>{
 <style scoped lang="scss">
 .screen-container{
   @apply cursor-pointer;
+
 }
 </style>
