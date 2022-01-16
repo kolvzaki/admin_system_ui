@@ -12,7 +12,7 @@ html, body {
 
 .el-select-dropdown__wrap {
   background: var(--el-dropdown-menu-background-color);
-  color: #fff; }
+  color: var(--el-color-black); }
   .el-select-dropdown__wrap .el-select-dropdown__item:hover {
     background: var(--el-background-color-base);
     color: var(--el-text-color-primary); }

@@ -1,10 +1,10 @@
 <template>
-  <div class="search-container" :class="{show: isShow}" @click.stop="showInput">
-    <svg-icon icon="flat-color-icons:search" class-name="navbar-icon"></svg-icon>
+  <div class="search-container" :class="{show: isShow}" >
+    <svg-icon class="cursor-pointer" icon="flat-color-icons:search" class-name="navbar-icon" @click.stop="showInput"></svg-icon>
     <el-select ref="headerSearchSelectRef" class="header-search-select"
-       filterable  default-first-option remote :remote-method="querySearch"
-       placeholder="search" @change="handleChange"       v-model="search">
-      <el-option v-for="item in 5" :key="item" :label="item" :value="5">
+       filterable default-first-option remote :remote-method="querySearch"
+       placeholder="search" @change="handleChange" v-model="search">
+      <el-option v-for="option in searchOptions" :key="option.item.path" :label="option.item.title.join('-->')" :value="option.item">
 
       </el-option>
     </el-select>
@@ -14,24 +14,64 @@
 <script setup lang="ts">
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import {FuseRoutes,filterRoutes} from '@/router/handleRoutes';
+import { useRouter } from "vue-router";
+import Fuse from "fuse.js";
+import { IFuseData } from "@/router/types";
+import FuseResult = Fuse.FuseResult;
 
 const isShow = ref(true);
-const search = ref("");
+const search = ref('');
+//let searchOptions = ref([]) //储存查询结果
+
+const router = useRouter()
+const fuseData = computed(()=>{
+  let fRoutes = filterRoutes(router.getRoutes());
+  return FuseRoutes(fRoutes)
+})
+//tips: fuseData是一个ref对象，new Fuse传进去.value才能查找数据
+//@ts-ignore
+const fuse = new Fuse(fuseData.value,{
+  shouldSort: true,
+  minMatchCharLength: 1,
+  //search weight
+  keys:[
+    {
+      name:'title',
+      weight: 0.6
+    },
+    {
+      name: 'path',
+      weight:0.4
+    }
+  ]
+})
+
 const showInput = () => {
   isShow.value = !isShow.value;
 };
-const querySearch = ()=>{
 
+const querySearch = (query:string)=>{
+  //console.log(fuse.search(query));
+  if (query !== ''){
+     searchOptions.value = fuse.search(query)
+  }else{
+    searchOptions.value = []
+  }
 };
-const handleChange= ()=>{
-  console.log('search change');
+
+const searchOptions=  ref<FuseResult<IFuseData>[]>([]);
+
+//选中回调
+const handleChange= (val:any)=>{
+  router.push(val.path)
+  search.value = ''
 }
 </script>
 
 <style scoped lang="scss">
 .search-container {
-  @apply flex;
 
   .header-search-select{
     @apply inline-block bg-transparent ;

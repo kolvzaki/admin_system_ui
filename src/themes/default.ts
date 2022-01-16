@@ -9,8 +9,6 @@ export default{
     '--el-tags-background-color': '#F6F6F6',
     '--el-background-color-base': '#483D8B',
     '--el-dropdown-menu-background-color':'#f0f0f0',
-
-
     '--el-color-white': '#483D8B', //el-menu-item el-dropdown el-tags el-setting
     '--el-color-black': '#000000',
     '--el-color-primary': '#ffffff',// el-dropdown-item:hover 字体颜色

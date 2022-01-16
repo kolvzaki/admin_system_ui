@@ -19,6 +19,7 @@ specifiers:
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-vue: ^8.2.0
+  fuse.js: ^6.5.3
   path-browserify: ^1.0.1
   pinia: ^2.0.6
   postcss: ^8.4.5
@@ -45,6 +46,7 @@ dependencies:
   animate.css: registry.nlark.com/animate.css/4.1.1
   axios: registry.npmmirror.com/axios/0.24.0
   element-plus: registry.npmmirror.com/element-plus/1.2.0-beta.6_vue@3.2.26
+  fuse.js: registry.npmmirror.com/fuse.js/6.5.3
   path-browserify: registry.npmmirror.com/path-browserify/1.0.1
   pinia: registry.npmmirror.com/pinia/2.0.6_typescript@4.5.4+vue@3.2.26
   screenfull: registry.npmmirror.com/screenfull/6.0.0
@@ -2796,6 +2798,13 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  registry.npmmirror.com/fuse.js/6.5.3:
+    resolution: {integrity: sha512-sA5etGE7yD/pOqivZRBvUBd/NaL2sjAu6QuSaFoe1H2BrJSkH/T/UXAJ8CdXdw7DvY3Hs8CXKYkDWX7RiP5KOg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fuse.js/download/fuse.js-6.5.3.tgz}
+    name: fuse.js
+    version: 6.5.3
+    engines: {node: '>=10'}
+    dev: false
 
   registry.npmmirror.com/glob-parent/5.1.2:
     resolution: {integrity: sha1-hpgyxYA0/mikCTwX3BXoNA2EAcQ=, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/glob-parent/download/glob-parent-5.1.2.tgz}
