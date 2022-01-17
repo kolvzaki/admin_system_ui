@@ -1,6 +1,11 @@
 import i18n from "@/i18n";
+import { watch } from "vue";
+import { Local } from "@/utils/storage";
+import useAppStore from "@/store/modules/useAppStore";
 
-export function i18nTitle(title:string):string{
+export function i18nTitle(title?:string):string{
+  if (title === undefined)
+    return ''
   return i18n.global.t('msg.route.' + title)
 }
 
@@ -15,3 +20,5 @@ export function i18nNavBar(v:string):string {
 export function i18nSkin(v:string):string{
   return i18n.global.t('msg.skin.' + v)
 }
+
+

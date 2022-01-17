@@ -1,14 +1,50 @@
-<script setup lang="ts">
+<script setup>
 import Navbar from '@/layout/Navbar/Navbar.vue'
 import Sidebar from '@/layout/Sidebar/Sidebar.vue'
 import useAppStore from "@/store/modules/useAppStore";
 import Setting from "@/layout/Settings/Setting.vue";
 import AppTabs from "@/layout/Tabs/AppTabs.vue"
 
-import {ref,onMounted} from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { isTags } from "@/utils/tags";
+import { i18nTitle } from "@/utils/i18n";
+import TagsView from "@/components/common/tagsView.vue";
+
+
+
 
 const appStore = useAppStore()
 const pics = ref('https://gitee.com/kolvzaki/pics/raw/master/img/logo.png')
+const route = useRoute()
+
+watch(route,(to,from)=>{
+  if(!isTags(to.path)){
+    return
+  }
+  const {fullPath,meta,name,params,path,query} = to
+  appStore.setTags({
+    fullPath,meta,name,params,path,query,title:getTitle(to)
+  })
+
+},{
+  immediate:true
+})
+
+const getTitle = (route) =>{
+  let title = ''
+  if (!route.meta){
+    const pathArr = route.path.split('/')
+    title = pathArr[pathArr.length - 1 ]
+  }
+  else{
+    title = i18nTitle(route.meta.title)
+  }
+
+  return title
+}
+
+
 </script>
 
 <template>
@@ -22,7 +58,9 @@ const pics = ref('https://gitee.com/kolvzaki/pics/raw/master/img/logo.png')
         <navbar></navbar>
       </el-header>
 
-      <app-tabs class="app-tags"></app-tabs>
+      <app-tabs class="app-tags">
+
+      </app-tabs>
 
       <el-main class="pageview">
         <router-view/>

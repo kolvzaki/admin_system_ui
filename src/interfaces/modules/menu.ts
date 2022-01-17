@@ -1,3 +1,5 @@
+import { RouteMeta } from "vue-router";
+
 export  interface IMenuItem {
   path: string,
   name:string,
@@ -8,7 +10,7 @@ export  interface IMenuItem {
 
 }
 
-export interface IMeta{
+export interface IMeta extends RouteMeta{
   icon?: string,
   title?:string,
   isKeepAlive: boolean,

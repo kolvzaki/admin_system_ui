@@ -4,6 +4,7 @@ import {useI18n} from "vue-i18n";
 import {Local} from "@/utils/storage";
 import theme_default from "@/assets/style/theme/default.scss"
 import screenfull from "screenfull";
+import { ITags } from "@/store/modules/types";
 
 // @ts-ignore
 const useAppStore = defineStore({
@@ -13,6 +14,7 @@ const useAppStore = defineStore({
         isScreenFull: false,
         showSettings: false,
         lang: Local.getItem('app-language') || 'zh',
+        tagsViewList: Local.getItem("app-tags") || [],
         theme: 'default',
         themes:[
           'default',
@@ -22,9 +24,6 @@ const useAppStore = defineStore({
         menu:{
           menuActive: '#ffd04b'
         },
-        breadcrumb:{
-          hoverColor: '#409eff'
-        }
     }),
     actions:{
 
@@ -45,6 +44,15 @@ const useAppStore = defineStore({
       setScreenFull(v:boolean){
         this.$state.isScreenFull = v
         Local.setItem('is-screen-full',this.$state.isScreenFull)
+      },
+      setTags( tag:any){
+        const isExists = this.$state.tagsViewList.find((item:any)=>{
+          return tag.path === item.path
+        })
+        if(!isExists){
+          this.$state.tagsViewList.push(tag)
+          Local.setItem("app-tags",this.$state.tagsViewList)
+        }
       }
     },
     getters:{
@@ -68,8 +76,10 @@ const useAppStore = defineStore({
       },
       getScreenFull:(state):boolean=>{
         return state.isScreenFull
+      },
+      getAppTags:(state)=>{
+        return state.tagsViewList
       }
-
     }
 })
 
