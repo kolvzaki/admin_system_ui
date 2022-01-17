@@ -14,19 +14,17 @@
 <script setup lang="ts">
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { computed, ref } from "vue";
+import { computed, ref, watch} from "vue";
 import {FuseRoutes,filterRoutes} from '@/router/handleRoutes';
 import { useRouter } from "vue-router";
 import Fuse from "fuse.js";
 import { IFuseData } from "@/router/types";
 import FuseResult = Fuse.FuseResult;
 
-const isShow = ref(true);
-const search = ref('');
-//let searchOptions = ref([]) //储存查询结果
 
+const search = ref('');
 const router = useRouter()
-const fuseData = computed(()=>{
+let fuseData = computed(()=>{
   let fRoutes = filterRoutes(router.getRoutes());
   return FuseRoutes(fRoutes)
 })
@@ -68,6 +66,25 @@ const handleChange= (val:any)=>{
   router.push(val.path)
   search.value = ''
 }
+const isShow = ref(false);
+watch(isShow,val=>{
+  if (val){
+    //@ts-ignore
+    headerSearchSelectRef.value.focus()
+    document.body.addEventListener('click',onClose)
+  }else{
+    document.body.removeEventListener('click',onClose)
+  }
+})
+
+const headerSearchSelectRef = ref(null);
+const onClose = ()=>{
+  //@ts-ignore
+  //headerSearchSelectRef.value
+  isShow.value = false
+  searchOptions.value = []
+}
+
 </script>
 
 <style scoped lang="scss">

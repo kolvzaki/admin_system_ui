@@ -53,4 +53,23 @@ const iconName = computed(()=> `#icon-${props.icon}`)
   width: 32px;
   height: 32px;
 }
+.tags-icon{
+  @apply inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  line-height: 10px;
+  text-align: center;
+  transition: .3s all ease-in-out;
+  transform-origin: 100% 50%;
+  &:before{
+    transform: scale(.5);
+    display: inline-block;
+    vertical-align: -3px;
+  }
+  &:hover{
+    background: #b4bccc;
+    color: #fff;
+  }
+}
 </style>

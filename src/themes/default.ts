@@ -7,6 +7,9 @@ export default{
     '--el-navbar-background-color':'#FAFAFA',
     '--el-main-background-color':'#FFFFFF',
     '--el-tags-background-color': '#F6F6F6',
+    '--el-tags-item-background-color':'#99CCFF',
+    '--el-tags-font-color': '#333300',
+    '--el-tags-active-color': '#FFFF00',
     '--el-background-color-base': '#483D8B',
     '--el-dropdown-menu-background-color':'#f0f0f0',
     '--el-color-white': '#483D8B', //el-menu-item el-dropdown el-tags el-setting

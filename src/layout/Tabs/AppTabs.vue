@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 
+import TagsView from "@/components/common/tagsView.vue";
 </script>
 
 <template>
-  <div class="tabs-container">
-    this is a tab
-  </div>
+  <tags-view></tags-view>
 </template>
 
 <style scoped lang="scss">
