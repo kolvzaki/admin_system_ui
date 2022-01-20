@@ -23,8 +23,9 @@ export default {
     '--el-text-color-regular': '#ffffff', // 常规文字颜色
 
     '--el-tags-item-background-color':'#adadad',
-    '--el-tags-font-color': '#ffffff',
-    '--el-tags-active-color': '#FF9900',
+    '--el-tags-active-color': '#000000',
+      '--el-tags-font-color': '#ffffff',
+    '--el-tags-active-font-color': '#FF9900',
 
     '--el-text-color-placeholder': '#c0c4cc',  // 占位文字颜色
     '--el-text-color-secondary': '#FFFFFF', // 次要文字颜色

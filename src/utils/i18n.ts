@@ -21,4 +21,19 @@ export function i18nSkin(v:string):string{
   return i18n.global.t('msg.skin.' + v)
 }
 
+export function  i18nContext(v:string):string{
+  return i18n.global.t('msg.contextMenu.'+v)
+}
+
+export function watchSwitchLang(...cbs:any){
+  //@ts-ignore
+  const store = useAppStore()
+  watch(
+    ()=>store.getAppLanguage,
+    ()=>{
+      cbs.forEach((cb:any)=>cb(store.getAppLanguage))
+    }
+  )
+}
+
 

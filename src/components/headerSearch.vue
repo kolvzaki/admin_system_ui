@@ -20,6 +20,7 @@ import { useRouter } from "vue-router";
 import Fuse from "fuse.js";
 import { IFuseData } from "@/router/types";
 import FuseResult = Fuse.FuseResult;
+import { watchSwitchLang } from "@/utils/i18n";
 
 
 const search = ref('');
@@ -30,21 +31,25 @@ let fuseData = computed(()=>{
 })
 //tips: fuseData是一个ref对象，new Fuse传进去.value才能查找数据
 //@ts-ignore
-const fuse = new Fuse(fuseData.value,{
-  shouldSort: true,
-  minMatchCharLength: 1,
-  //search weight
-  keys:[
-    {
-      name:'title',
-      weight: 0.6
-    },
-    {
-      name: 'path',
-      weight:0.4
-    }
-  ]
-})
+let fuse: Fuse<IFuseData>
+const initFuse =(fuseData:IFuseData[])=>{
+  fuse = new Fuse(fuseData ,{
+    shouldSort: true,
+    minMatchCharLength: 2,
+    //search weight
+    keys:[
+      {
+        name:'title',
+        weight: 0.6
+      },
+      {
+        name: 'path',
+        weight:0.4
+      }
+    ]
+  })
+}
+initFuse(fuseData.value)
 
 const showInput = () => {
   isShow.value = !isShow.value;
@@ -84,6 +89,14 @@ const onClose = ()=>{
   isShow.value = false
   searchOptions.value = []
 }
+
+watchSwitchLang(()=>{
+  fuseData = computed(()=>{
+    let fRoutes = filterRoutes(router.getRoutes());
+    return FuseRoutes(fRoutes)
+  })
+  initFuse(fuseData.value)
+} )
 
 </script>
 

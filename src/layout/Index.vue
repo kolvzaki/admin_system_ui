@@ -8,7 +8,7 @@ import AppTabs from "@/layout/Tabs/AppTabs.vue"
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { isTags } from "@/utils/tags";
-import { i18nTitle } from "@/utils/i18n";
+import { i18nTitle,watchSwitchLang } from "@/utils/i18n";
 import TagsView from "@/components/common/tagsView.vue";
 
 
@@ -28,12 +28,11 @@ const getTitle = (route) =>{
   return title
 }
 
-watch(route,(to,from)=>{
 
+watch(route,(to,from)=>{
   if(!isTags(to.path)){
     return
   }
-
   const {fullPath,meta,name,params,path,query} = to
   appStore.addTagsViewList({
     fullPath,meta,name,params,path,query,title:getTitle(to)
@@ -42,7 +41,14 @@ watch(route,(to,from)=>{
 },{
   immediate:true
 })
-
+watchSwitchLang(()=>{
+  appStore.getAppTags.forEach((route,index)=>{
+    appStore.changeTagsView(index,{
+      ...route,
+      title: getTitle(route)
+    })
+  })
+})
 
 
 

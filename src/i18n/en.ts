@@ -29,5 +29,10 @@ export default {
     default: 'Default',
     dark: 'Dark',
     rose: 'Rose'
+  },
+  contextMenu:{
+    refresh: 'refresh',
+    closeRight:'Close right side tags',
+    closeAll :'Close all tags'
   }
 }

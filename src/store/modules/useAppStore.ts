@@ -53,6 +53,10 @@ const useAppStore = defineStore({
           this.$state.tagsViewList.push(tag)
           Local.setItem('app-tags',this.$state.tagsViewList)
         }
+      },
+      changeTagsView(index:number,tag:object){
+        this.$state.tagsViewList[index] = tag
+        Local.setItem('app-tags',this.$state.tagsViewList)
       }
     },
     getters:{
@@ -79,7 +83,8 @@ const useAppStore = defineStore({
       },
       getAppTags:(state)=>{
         return state.tagsViewList
-      }
+      },
+
     }
 })
 

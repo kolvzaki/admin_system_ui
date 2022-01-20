@@ -55,10 +55,10 @@ const iconName = computed(()=> `#icon-${props.icon}`)
 }
 .tags-icon{
   @apply inline-block;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  line-height: 10px;
+  margin-bottom: 3px;
   text-align: center;
   transition: .3s all ease-in-out;
   transform-origin: 100% 50%;
@@ -68,7 +68,7 @@ const iconName = computed(()=> `#icon-${props.icon}`)
     vertical-align: -3px;
   }
   &:hover{
-    background: #b4bccc;
+    animation: pulse .25s;
     color: #fff;
   }
 }

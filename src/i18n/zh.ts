@@ -28,5 +28,10 @@ export default {
     default: '默认',
     dark: '黑夜',
     rose: '玫红'
+  },
+  contextMenu:{
+    refresh: '刷新',
+    closeRight:'关闭右侧标签',
+    closeAll :'关闭全部标签'
   }
 };
