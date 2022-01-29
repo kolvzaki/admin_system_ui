@@ -13,8 +13,9 @@
       {{tag.title}}
       <svg-icon v-show="!isActive(tag)" icon="emojione-v1:cross-mark" class-name="tags-icon" @click.prevent.stop="onCloseClick(index)"> </svg-icon>
     </router-link>
+    <context-menu v-show="menuVisible" :style="menuStyle" :index="selectIndex"></context-menu>
   </div>
-  <context-menu v-show="menuVisible"></context-menu>
+
 </template>
 
 <script setup>
@@ -22,7 +23,7 @@
 import useAppStore from "../../store/modules/useAppStore";
 import { useRoute } from "vue-router";
 import SvgIcon from "./SvgIcon.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import ContextMenu from "@/components/common/ContextMenu.vue";
 
 const route = useRoute()
@@ -31,19 +32,36 @@ const isActive = (tag) =>{
   return tag.path === route.path
 }
 const onCloseClick = (index) =>{
-
+  appStore.removeTagsView({
+    type:'index',
+    index
+  })
 }
 const menuVisible = ref(false)
 const menuStyle = ref({
   left: 0,
   top: 0
 })
-
+const selectIndex = ref(0)
 const openMenu = (e,index)=>{
-  menuVisible.value = !menuVisible.value
-  const{x,y} = e
-
+  const {x,y} = e
+  menuVisible.value = true
+  menuStyle.value.left = x +'px'
+  menuStyle.value.top = y + 'px'
+  selectIndex.value = index
 }
+
+const closeMenu = ()=>{
+  menuVisible.value = false
+}
+
+watch(menuVisible,val=>{
+  if (val){
+    document.body.addEventListener('click',closeMenu)
+  }else{
+    document.body.removeEventListener('click',closeMenu)
+  }
+})
 
 </script>
 

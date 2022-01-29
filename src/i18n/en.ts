@@ -33,6 +33,6 @@ export default {
   contextMenu:{
     refresh: 'refresh',
     closeRight:'Close right side tags',
-    closeAll :'Close all tags'
+    closeOthers :'Close other tags'
   }
 }

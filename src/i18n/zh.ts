@@ -32,6 +32,6 @@ export default {
   contextMenu:{
     refresh: '刷新',
     closeRight:'关闭右侧标签',
-    closeAll :'关闭全部标签'
+    closeOthers :'关闭其他标签'
   }
 };

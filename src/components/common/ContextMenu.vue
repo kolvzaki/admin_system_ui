@@ -2,28 +2,39 @@
   <ul class="context-menu-container">
     <li @click="handleRefresh">{{i18nContext('refresh')}}</li>
     <li @click="handleCloseRight">{{i18nContext('closeRight')}}</li>
-    <li @click="handleCloseAll">{{i18nContext('closeAll')}}</li>
+    <li @click="handleCloseOther">{{i18nContext('closeOthers')}}</li>
   </ul>
 </template>
 
 <script setup>
 import { i18nContext } from "@/utils/i18n";
+import { useRouter } from "vue-router";
+import useAppStore from "@/store/modules/useAppStore";
 
-defineProps({
+const props = defineProps({
   index:{
     type:Number,
     required:false
   }
 })
 
-const handleRefresh = () =>{
+const router = useRouter()
+const appStore = useAppStore()
 
+const handleRefresh = () =>{
+  router.go(0)
 }
 const handleCloseRight= ()=>{
-
+  appStore.removeTagsView({
+    type:'right',
+    index: props.index
+  })
 }
-const handleCloseAll = ()=>{
-
+const handleCloseOther = ()=>{
+  appStore.removeTagsView({
+    type: 'other',
+    index: props.index
+  })
 }
 
 </script>

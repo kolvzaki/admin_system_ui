@@ -70,7 +70,15 @@ watchSwitchLang(()=>{
       </app-tabs>
 
       <el-main class="pageview">
-        <router-view/>
+        <router-view v-slot="{Component,route}">
+          <transition name="appAnime" mode="out-in">
+              <keep-alive>
+                <div>
+                  <component :is="Component" :key="route.path"></component>
+                </div>
+              </keep-alive>
+          </transition>
+        </router-view>
       </el-main>
     </el-container>
     <el-container v-show="appStore.getShowSettings">
@@ -80,6 +88,14 @@ watchSwitchLang(()=>{
 </template>
 
 <style scoped lang="scss">
+
+.appAnime-enter-active{
+  animation: fadeIn .5s;
+}
+
+.appAnime-leave-active{
+  animation: rollOut .5s;
+}
 
 .app-container{
   @apply w-full h-full ;

@@ -1,5 +1,6 @@
 <template>
-  <router-view/>
+  <router-view >
+  </router-view>
 </template>
 
 <script lang="ts" setup>
@@ -14,6 +15,6 @@ onMounted(()=>{
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

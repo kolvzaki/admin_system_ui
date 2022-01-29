@@ -57,6 +57,25 @@ const useAppStore = defineStore({
       changeTagsView(index:number,tag:object){
         this.$state.tagsViewList[index] = tag
         Local.setItem('app-tags',this.$state.tagsViewList)
+      },
+      /*
+      * @Param types
+      * */
+      removeTagsView(item:{
+        type: string,
+        index :number
+      }){
+        if (item.type === 'index'){
+          this.$state.tagsViewList.splice(item.index,1)
+        }else if(item.type === 'other'){
+          this.$state.tagsViewList.splice(item.index+1,this.$state.tagsViewList.length - item.index + 1)
+          this.$state.tagsViewList.splice(0,item.index)
+
+        }else if(item.type === 'right'){
+          this.$state.tagsViewList.splice(item.index+1,this.$state.tagsViewList.length - item.index + 1)
+        }
+
+        Local.setItem('app-tags',this.$state.tagsViewList)
       }
     },
     getters:{
