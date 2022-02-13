@@ -1,5 +1,7 @@
 <template>
-play ground page
+  <div>
+    play ground page
+  </div>
 </template>
 
 <script>

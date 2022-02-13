@@ -9,10 +9,10 @@ import 'element-plus/dist/index.css'
 
 import * as Icons from '@element-plus/icons-vue';
 import i18n from "@/i18n";
+import pinia from "@/store"
 
-import {createPinia} from "pinia";
 
-const pinia = createPinia()
+
 const app = createApp(App)
   .use(router)
   .use(i18n)

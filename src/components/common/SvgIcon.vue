@@ -33,6 +33,9 @@ const iconName = computed(()=> `#icon-${props.icon}`)
 </script>
 
 <style scoped lang="scss">
+.el-icon{
+  @apply w-auto h-auto;
+}
 .svg-icon{
   @apply fill-current overflow-hidden;
   width: 1em;
@@ -45,11 +48,24 @@ const iconName = computed(()=> `#icon-${props.icon}`)
 }
 .sidebar-icon{
   @apply w-5 h-5;
-  margin-right: 10px;
-
 }
+
+.button-icon{
+  @apply ml-1 ;
+}
+
+.data-icon{
+  width: 64px;
+  height: 64px;
+}
+
+.title-icon{
+  width: 18px;
+  height: 18px;
+}
+
 .navbar-icon{
-  @apply inline-block ;
+  @apply inline-block;
   width: 32px;
   height: 32px;
 }

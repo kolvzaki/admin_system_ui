@@ -3,6 +3,7 @@ import en from './en'
 
 import {createI18n} from "vue-i18n";
 import {Local} from "@/utils/storage";
+import { useAppStoreOutside } from "@/store/modules/useAppStore";
 
 
 
@@ -20,7 +21,7 @@ const msg = {
 }
 
 
-const locale = Local.getItem('app-language')
+const locale = useAppStoreOutside().getAppLanguage
 
 const i18n = createI18n({
   legacy:false,

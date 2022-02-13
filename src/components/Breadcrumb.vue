@@ -42,12 +42,12 @@ watch(routes,()=>{
   @apply inline-block ml-3 text-base;
   .no-direct{
     @apply cursor-default;
-    color: var(--el-breadcrumb-text-color);
+
   }
   .can-direct{
     @apply cursor-pointer transition-all;
     &:hover{
-      color: var(--el-breadcrumb-hover-text-color)
+
     }
   }
 }

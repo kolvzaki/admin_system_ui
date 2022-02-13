@@ -16,7 +16,7 @@ const publicRoutes:RouteRecordRaw[]=[
       {
         path: '/dashboard',
         name:'dashboard',
-        component:()=> import("@/views/dashboard/Index.vue"),
+        component:()=> import("@/views/Dashboard/Index.vue"),
         meta:{
           icon: 'odometer',
           title: 'dashboard',

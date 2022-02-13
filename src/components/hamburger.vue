@@ -23,7 +23,7 @@
   @apply cursor-pointer p-2 transition-all duration-700;
 
   &:hover{
-    background: var(--el-hamburger-hover-color);
+    background: #fff;
   }
 }
 .isActive{

@@ -9,6 +9,7 @@ const direction = ref('rtl')
 const appStore = useAppStore()
 
 
+
 </script>
 
 <template>
@@ -18,6 +19,7 @@ const appStore = useAppStore()
     :direction="direction"
     size="20%"
     v-model="appStore.getShowSettings"
+    @closed="appStore.changeShow"
   >
 
   </el-drawer>

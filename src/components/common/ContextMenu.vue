@@ -42,8 +42,8 @@ const handleCloseOther = ()=>{
 <style scoped lang="scss">
 .context-menu-container{
   @apply fixed z-50 py-2 text-base;
-  background: var(--el-bg-color);
-  color: var(--el-color-black);
+
+
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0 rgba(0,0,0,.5);
   list-style-type: none;

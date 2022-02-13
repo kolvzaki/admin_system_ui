@@ -42,8 +42,9 @@ const size = ref(10)
     <el-menu
       :default-active="activeRoute"
       class="sidemenu"
-
-      :active-text-color="appStore.getMenuActive"
+      background-color="#333366"
+      text-color="#FFFFFF"
+      active-text-color="#ffd04b"
       :collapse="appStore.isCollapse"
       router
       unique-opened

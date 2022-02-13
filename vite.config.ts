@@ -39,7 +39,14 @@ export default defineConfig({
 
   server:{
     strictPort: true,
+    port: 8989,
     open: true,
+    proxy:{
+      '/api':{
+        target: 'http://localhost:8888',
+        changeOrigin: true,
+      }
+    }
   },
   resolve:{
     alias:{

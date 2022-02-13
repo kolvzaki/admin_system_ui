@@ -13,7 +13,7 @@
       <div class="form-contain">
 
         <div class="selector-contain">
-          <el-radio-group  v-model="loginType" @change="show">
+          <el-radio-group  v-model="loginType">
             <el-radio-button label="Account" ></el-radio-button>
             <el-radio-button label="Mobile" ></el-radio-button>
             <el-radio-button label="Wechat" ></el-radio-button>
@@ -22,7 +22,7 @@
 
         <transition-group name="loginAnime">
           <div class="userform" v-if="loginType==='Account'">
-            <el-form v-model="accountForm" label-width="120px" label-position="right" :rules="loginRules">
+            <el-form v-model="accountForm" label-width="120px" label-position="right">
               <el-form-item label="Username" prop="username">
                 <el-input v-model="accountForm.username" :suffix-icon="UserFilled">
                 </el-input>
@@ -34,12 +34,12 @@
           </div>
 
           <div class="userform" v-if="loginType === 'Mobile'">
-            <el-form v-model="accountForm" label-width="120px" label-position="right">
+            <el-form v-model="mobileForm" label-width="120px" label-position="right">
               <el-form-item label="Mobile">
-                <el-input v-model="accountForm.mobile" :suffix-icon="Cellphone"/>
+                <el-input v-model="mobileForm.mobile" :suffix-icon="Cellphone"/>
               </el-form-item>
               <el-form-item label="Code">
-                <el-input v-model="accountForm.code" >
+                <el-input v-model="mobileForm.code" >
                   <template #suffix>
                     <el-button type="text" @click="getCodeByMobile">获取验证码</el-button>
                   </template>
@@ -54,11 +54,10 @@
           </div>
 
           <div class="btnContain" v-if="loginType !== 'Wechat'">
-            <el-button type="primary" @click="login">Enter</el-button>
+            <el-button @click="login" type="primary">Enter</el-button>
           </div>
+
         </transition-group>
-
-
       </div>
     </div>
   </div>
@@ -66,54 +65,55 @@
 </template>
 
 <script setup lang="ts">
-import {ref,reactive,toRefs} from 'vue'
+import { ref, reactive, toRefs, watch } from "vue";
 import {UserFilled,Lock,Cellphone} from '@element-plus/icons-vue'
-import {ElMessage} from "element-plus";
+import {ElMessage as message} from "element-plus";
 import {useRouter} from "vue-router";
-import {loginForm} from "@/interfaces";
+import { loginByForm } from "@/api/user";
 import useUserStore from "@/store/modules/useUserStore";
-
+import useAppStore from "@/store/modules/useAppStore";
 
 const pics =   'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
 const userStore = useUserStore()
+const appStore = useAppStore()
 const loginType = ref('Account')
 const router = useRouter()
 
-let accountForm = reactive<loginForm>({
-  username:'',
-  password:'',
-  mobile:'',
-  code:'',
-  type: 0,
+let accountForm = reactive<{
+  username: string,
+  password: string
+}>({
+  username:"",
+  password:""
 })
 
-const show = (value:string):void=>{
-  switch (value){
-    case 'Account':{
-      accountForm.type = 0
-      break
-    }
-    case 'Mobile':{
-      accountForm.type = 1
-      break
-    }
-    case 'Wechat':{
-      accountForm.type = 2
-      break
-    }
-    default:
-      return;
-  }
-}
+let mobileForm = reactive<{
+  mobile:string,
+  code:string
+}>({
+  mobile:"",
+  code:""
+})
 
 function getCodeByMobile():void{
-  ElMessage.success('success')
+  message.success('success')
 }
 
-function login():void{
-  ElMessage.success('login success')
-  userStore.setLoginInfo('1111')
-  router.push('/')
+async function login(): Promise<void>{
+  if (loginType.value === "Account"){
+    await loginByForm(accountForm).then(res=>{
+      console.log(res);
+      const {data} = res
+      if (data){
+        router.push('/')
+        userStore.setLoginInfo(data)
+      }
+      message.success("登录成功")
+
+    }).catch(err=>{
+      router.push('/login')
+    })
+  }
 }
 
 </script>

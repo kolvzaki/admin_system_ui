@@ -1,5 +1,7 @@
 <template>
-  user manage
+  <div>
+    user
+  </div>
 </template>
 
 <script>

@@ -1,10 +1,10 @@
 <template>
-  <div>
-    tools manage
-  </div>
+<div>
+  permissions manage
+</div>
 </template>
 
-<script>
+<script setup>
 
 </script>
 

@@ -1,34 +1,51 @@
 import {defineStore} from "pinia";
 import {Local, Session} from "@/utils/storage";
+import pinia from "@/store";
+
 
 const useUserStore = defineStore({
     id: 'userStore',
     state:()=>({
-      token:'',
-      avatar: '',
-      roles: '',
-      name:'',
+      token:Session.getItem('token')||'',
+      info:Session.getItem('info')||{},
+      roles: Session.getItem('roles')||[],
+      permissions:Session.getItem('permissions')||[],
     }),
 
     actions:{
-      setLoginInfo(value:any){
-        Local.setItem('token',value)
-        this.$state.token = value
+      setLoginInfo(data:any){
+        Session.setItem('token',data?.token)
+        Session.setItem('roles',data?.role)
+        Session.setItem('permissions',data?.permission)
+        Session.setItem('info',data?.info)
+        this.$state.token = data?.token
+        this.$state.roles = data?.role
+        this.$state.permissions = data?.permission
+        this.$state.info = data?.info
       },
+
+      setInfo(data:object){
+        this.info = data
+        Session.setItem('info',data)
+      },
+
       clearInfo(){
         Session.clearAll()
+        this.$reset()
       }
     },
     getters:{
       getToken(state){
-        if (state.token.length === 0){
-          return Local.getItem('token')
-        }
-        else
-          return state.token
+        return state.token
       },
-      getAvatar(state){
-        return state.avatar
+      getRoles(state){
+        return state.roles
+      },
+      getPermissions(state){
+        return state.permissions
+      },
+      getInfo(state){
+        return state.info
       }
 
     }
@@ -36,4 +53,8 @@ const useUserStore = defineStore({
 
 
 
-export default useUserStore
+export default useUserStore;
+
+export function useUserStoreOutside(){
+  return useUserStore(pinia)
+}

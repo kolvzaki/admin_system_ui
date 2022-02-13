@@ -10,7 +10,7 @@ const systemRoutes:RouteRecordRaw[] = [
       title: 'systemManage',
       icon: 'icon-park:computer',
       rank:4,
-      roles: ['sys_admin']
+      roles: ['sys_root']
     },
     children:[
       {
@@ -20,7 +20,7 @@ const systemRoutes:RouteRecordRaw[] = [
         meta:{
           title: 'userManage',
           icon: 'emojione:blond-haired-person-medium-light-skin-tone',
-          roles: ['sys:admin']
+          roles: ['sys:root']
         },
 
       },
@@ -31,7 +31,7 @@ const systemRoutes:RouteRecordRaw[] = [
         meta:{
           title: 'playGroundManage',
           icon: 'noto:umbrella-on-ground',
-          roles: ['sys:admin']
+          roles: ['sys:root']
         },
 
       },
@@ -42,8 +42,28 @@ const systemRoutes:RouteRecordRaw[] = [
         meta:{
           title: 'equipmentManage',
           icon: 'emojione:pool-8-ball',
-          roles: ['sys:admin']
+          roles: ['sys:root']
         },
+      },
+      {
+        path:'/system/role',
+        name: 'role_manage',
+        component: ()=>import("@/views/System/Role/Index.vue"),
+        meta:{
+          title: 'roleManage',
+          icon: 'carbon:user-role',
+          roles: ['sys:root']
+        }
+      },
+      {
+        path:'/system/permission',
+        name: 'permission_manage',
+        component: ()=>import("@/views/System/Permission/Index.vue"),
+        meta:{
+          title: 'permissionManage',
+          icon: 'icon-park:permissions',
+          roles: ['sys:root']
+        }
       }
     ]
   }

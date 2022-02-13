@@ -2,7 +2,7 @@
 
 .sidebar-logo-contain{
   @apply h-14 w-full flex items-center ;
-  background: var(--el-logo-bg-color);
+  background: #009966;
   .logo-contain{
     @apply  inline-block w-max h-max p-3;
     .el-image{
@@ -23,15 +23,13 @@
   animation: flipOutX .2s;
 }
 
-.sidemenu{
-  background: var(--el-background-color-base);
-}
-
 .sidemenu:not(.el-menu--collapse) {
   width: 221px;
   height: 100vh;
-  .el-menu-item,.el-sub-menu{
-    @apply text-base tracking-wider;
+  ::v-deep(span){
+    @apply tracking-wider ;
+    font-size: 16px !important;
+    margin-left: 10px;
   }
 }
 

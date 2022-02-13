@@ -1,9 +1,9 @@
 <template>
   <div class="search-container" :class="{show: isShow}" >
-    <svg-icon class="cursor-pointer" icon="flat-color-icons:search" class-name="navbar-icon" @click.stop="showInput"></svg-icon>
+    <svg-icon class="cursor-pointer"  icon="flat-color-icons:search" class-name="navbar-icon" @click.stop="showInput"></svg-icon>
     <el-select ref="headerSearchSelectRef" class="header-search-select"
        filterable default-first-option remote :remote-method="querySearch"
-       placeholder="search" @change="handleChange" v-model="search">
+       placeholder="search" @change="handleChange" v-model="search" size="mini">
       <el-option v-for="option in searchOptions" :key="option.item.path" :label="option.item.title.join('-->')" :value="option.item">
 
       </el-option>
@@ -102,7 +102,7 @@ watchSwitchLang(()=>{
 
 <style scoped lang="scss">
 .search-container {
-
+  @apply w-auto h-auto;
   .header-search-select{
     @apply inline-block bg-transparent ;
     transition: width .3s;
@@ -114,6 +114,8 @@ watchSwitchLang(()=>{
       box-shadow: none !important;
       background: none;
       border-bottom: 1px solid #000000;
+      position: relative;
+
     }
   }
   &.show{

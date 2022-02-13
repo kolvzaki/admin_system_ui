@@ -7,22 +7,9 @@ html, body {
 #app {
   @apply w-full h-full; }
 
-.el-dropdown-menu {
-  background: var(--el-dropdown-menu-background-color) !important; }
-
-.el-select-dropdown__wrap {
-  background: var(--el-dropdown-menu-background-color);
-  color: var(--el-color-black); }
-  .el-select-dropdown__wrap .el-select-dropdown__item:hover {
-    background: var(--el-background-color-base);
-    color: var(--el-text-color-primary); }
-  .el-select-dropdown__wrap .el-select-dropdown__item.hover {
-    background: var(--el-background-color-base);
-    color: var(--el-text-color-primary); }
-
 .sidebar-logo-contain {
   @apply h-14 w-full flex items-center;
-  background: var(--el-logo-bg-color); }
+  background: #009966; }
   .sidebar-logo-contain .logo-contain {
     @apply inline-block w-max h-max p-3; }
     .sidebar-logo-contain .logo-contain .el-image {
@@ -37,14 +24,13 @@ html, body {
 .titleAnime-leave-active {
   animation: flipOutX .2s; }
 
-.sidemenu {
-  background: var(--el-background-color-base); }
-
 .sidemenu:not(.el-menu--collapse) {
   width: 221px;
   height: 100vh; }
-  .sidemenu:not(.el-menu--collapse) .el-menu-item, .sidemenu:not(.el-menu--collapse) .el-sub-menu {
-    @apply text-base tracking-wider; }
+  .sidemenu:not(.el-menu--collapse) ::v-deep(span) {
+    @apply tracking-wider;
+    font-size: 16px !important;
+    margin-left: 10px; }
 
 ::v-deep(.el-menu--collapse) {
   height: 100vh; }

@@ -1,56 +1,57 @@
 <script setup>
-import Navbar from '@/layout/Navbar/Navbar.vue'
-import Sidebar from '@/layout/Sidebar/Sidebar.vue'
+import Navbar from "@/layout/Navbar/Navbar.vue";
+import Sidebar from "@/layout/Sidebar/Sidebar.vue";
 import useAppStore from "@/store/modules/useAppStore";
 import Setting from "@/layout/Settings/Setting.vue";
-import AppTabs from "@/layout/Tabs/AppTabs.vue"
+import AppTabs from "@/layout/Tabs/AppTabs.vue";
 
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { isTags } from "@/utils/tags";
-import { i18nTitle,watchSwitchLang } from "@/utils/i18n";
+import { i18nTitle, watchSwitchLang } from "@/utils/i18n";
 import TagsView from "@/components/common/tagsView.vue";
 
 
-const appStore = useAppStore()
-const pics = ref('https://gitee.com/kolvzaki/pics/raw/master/img/logo.png')
-const route = useRoute()
+const appStore = useAppStore();
+const pics = ref("https://gitee.com/kolvzaki/pics/raw/master/img/logo.png");
+const route = useRoute();
 
-const getTitle = (route) =>{
-  let title = ''
-  if (!route.meta){
-    const pathArr = route.path.split('/')
-    title = pathArr[pathArr.length - 1 ]
+const getTitle = (route) => {
+  let title = "";
+  if (!route.meta) {
+    const pathArr = route.path.split("/");
+    title = pathArr[pathArr.length - 1];
+  } else {
+    title = i18nTitle(route.meta.title);
   }
-  else{
-    title = i18nTitle(route.meta.title)
-  }
-  return title
-}
+  return title;
+};
 
 
-watch(route,(to,from)=>{
-  if(!isTags(to.path)){
-    return
+watch(route, (to, from) => {
+  if (!isTags(to.path)) {
+    return;
   }
-  const {fullPath,meta,name,params,path,query} = to
+  const { fullPath, meta, name, params, path, query } = to;
   appStore.addTagsViewList({
-    fullPath,meta,name,params,path,query,title:getTitle(to)
-  })
+    fullPath, meta, name, params, path, query, title: getTitle(to)
+  });
 
-},{
-  immediate:true
-})
-watchSwitchLang(()=>{
-  appStore.getAppTags.forEach((route,index)=>{
-    appStore.changeTagsView(index,{
+}, {
+  immediate: true
+});
+watchSwitchLang(() => {
+  appStore.getAppTags.forEach((route, index) => {
+    appStore.changeTagsView(index, {
       ...route,
       title: getTitle(route)
-    })
-  })
+    });
+  });
+});
+
+onMounted(()=>{
+
 })
-
-
 
 </script>
 
@@ -69,17 +70,17 @@ watchSwitchLang(()=>{
 
       </app-tabs>
 
-      <el-main class="pageview">
-        <router-view v-slot="{Component,route}">
-          <transition name="appAnime" mode="out-in">
-              <keep-alive>
-                <div>
-                  <component :is="Component" :key="route.path"></component>
-                </div>
-              </keep-alive>
-          </transition>
-        </router-view>
-      </el-main>
+        <el-main class="pageview">
+          <router-view v-slot="{Component,route}">
+            <keep-alive>
+              <transition name="appAnime" mode="out-in">
+                <component :is="Component" :key="route.path"></component>
+              </transition>
+            </keep-alive>
+          </router-view>
+        </el-main>
+
+
     </el-container>
     <el-container v-show="appStore.getShowSettings">
       <setting />
@@ -89,35 +90,36 @@ watchSwitchLang(()=>{
 
 <style scoped lang="scss">
 
-.appAnime-enter-active{
+.appAnime-enter-active {
   animation: fadeIn .5s;
 }
 
-.appAnime-leave-active{
-  animation: rollOut .5s;
+.appAnime-leave-active {
+  animation: fadeOut .5s;
 }
 
-.app-container{
+.app-container {
   @apply w-full h-full ;
 
-  .app-sidebar{
+  .app-sidebar {
     @apply h-full overflow-hidden;
     transition: all ease-in-out .3s;
   }
 
-  .app-content{
+  .app-content {
     @apply w-full h-full;
-    .app-header{
+    .app-header {
       @apply w-full h-14;
-      background: var(--el-navbar-background-color);
+
     }
-    .app-tags{
+
+    .app-tags {
       @apply py-1 w-full h-max border border-solid;
-      background: var(--el-tags-background-color);
-      border-color: var(--el-border-color-base);
+
     }
-    .pageview{
-      background: var(--el-main-background-color);
+
+    .pageview {
+
     }
   }
 }

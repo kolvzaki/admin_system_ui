@@ -7,6 +7,8 @@ export default {
     profile: 'Profile',
     systemManage: 'System Manage',
     userManage: 'User',
+    roleManage: 'Role',
+    permissionManage: 'Permission',
     playGroundManage: 'Ground',
     equipmentManage: 'Equipment',
     exception: 'Exception',
@@ -34,5 +36,62 @@ export default {
     refresh: 'refresh',
     closeRight:'Close right side tags',
     closeOthers :'Close other tags'
+  },
+  profile:{
+    title: 'Basic Info',
+    updateButton: 'Edit Profile',
+    changeAvatarButton: 'Change avatar',
+    securityButton: 'Security',
+    updateProfile: 'Update Profile',
+
+    basicCardTitle: 'Basic',
+    securityCardTitle: 'Security',
+    security:{
+      rpTitle: 'Role&Permission',
+      apTitle:'Account&Password',
+      changePasswordButton: 'Change Password',
+      roleTitle: 'Role',
+      permissionTitle: 'Permission',
+
+      oldPass: 'Old Pass',
+      newPass: 'New pass',
+      confirm: 'Confirm Pass'
+    },
+
+    nickname: 'Nickname',
+    gender: 'Gender',
+    mobile:'Mobile',
+    email:'Email',
+    age:'Age',
+    introduce:'Introduce',
+    username: 'Username',
+    isAvailable: 'Account Status',
+    lastLoginTime: 'Last Login Time',
+    updateTime: 'Last Update Time',
+    createdTime: 'Create Time'
+  },
+  accountStatus:{
+    available: 'Available',
+    unavailable: 'Unavailable'
+  },
+  cardItem:{
+    UserData: 'Active User',
+    MessageData: 'Message',
+    PlaygroundData: 'Playground',
+    MoneyData:'Daily Income'
+  },
+  charts:{
+    title: 'Recent Data'
+  },
+  avatarFunctions:{
+    logout: 'logout'
+  },
+  gender:{
+    Male: 'Male',
+    Female: 'Female'
+  },
+  button:{
+    confirm: 'Confirm',
+    cancel: 'Cancle'
   }
 }
