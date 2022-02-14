@@ -68,16 +68,30 @@ export default {
     updateTime: '上次更新时间',
     createdTime: '创建时间'
   },
-  accountStatus:{
-    available: '正常',
-    unavailable: '不可用'
-  },
+
   cardItem:{
     UserData: '今日活跃用户',
     MessageData: '今日消息',
     PlaygroundData: '今日活跃场地',
     MoneyData:'今日流水'
   },
+
+  userQuery:{
+    username: '账号',
+    nickname: '姓名',
+    gender: '性别',
+    mobile:'联系电话',
+    email:'联系邮箱',
+    minAge:'最小年龄',
+    maxAge: '最大年龄',
+    introduce:'自我介绍',
+    isAvailable: '账号状态',
+    isDeleted: '存在',
+    lastLoginTime: '上次登录时间',
+    updateTime: '上次更新时间',
+    createdTime: '创建时间',
+  },
+
   charts:{
     title:'近期数据'
   },
@@ -88,6 +102,16 @@ export default {
   gender:{
     Male: '男',
     Female: '女'
+  },
+
+  accountStatus:{
+    available: '正常',
+    unavailable: '不可用'
+  },
+
+  DeleteStatus:{
+    deleted: '已删除',
+    exists: '运行中'
   },
 
   button:{

@@ -1,11 +1,13 @@
 import service from "@/request/request";
+import { queryModel } from "@/views/System/User/types/types";
 
 const api = {
   loginByForm: "/user/login",
   loginByMobile: "/user/loginByMobile",
   logout: "/user/logout",
   profileUpdate: '/profile/update',
-  passwordUpdate: '/profile/pwdUpdate'
+  passwordUpdate: '/profile/pwdUpdate',
+  getUsers: '/user/queryUsers'
 }
 
 export function loginByForm(data:object){
@@ -23,3 +25,10 @@ export function profileUpdate(data:object){
 export function passwordUpdate(data:object){
   return service.post(api.passwordUpdate,data)
 }
+
+export function getUsers(query:queryModel){
+  return service.get(api.getUsers,{
+    params:query
+  })
+}
+

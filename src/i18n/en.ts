@@ -80,6 +80,21 @@ export default {
     PlaygroundData: 'Playground',
     MoneyData:'Daily Income'
   },
+  userQuery:{
+    username: 'Username',
+    nickname: 'Nickname',
+    gender: 'Gender',
+    mobile:'Mobile',
+    email:'Email',
+    minAge:'min age',
+    maxAge: 'max age',
+    introduce:'introduce',
+    isAvailable: 'Available',
+    lastLoginTime: 'Last Login Time',
+    updateTime: 'Update Time',
+    createdTime: 'Created Time',
+    isDeleted: 'Exist',
+  },
   charts:{
     title: 'Recent Data'
   },
@@ -93,5 +108,9 @@ export default {
   button:{
     confirm: 'Confirm',
     cancel: 'Cancle'
-  }
+  },
+  DeleteStatus:{
+    deleted: 'Deleted',
+    exists: 'Running'
+  },
 }

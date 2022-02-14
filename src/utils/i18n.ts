@@ -1,7 +1,7 @@
 import i18n from "@/i18n";
 import { watch } from "vue";
 import { Local } from "@/utils/storage";
-import useAppStore from "@/store/modules/useAppStore";
+import useAppStore, { useAppStoreOutside } from "@/store/modules/useAppStore";
 
 export function i18nTitle(title?:string):string{
   if (title === undefined)
@@ -41,11 +41,23 @@ export function i18nAvatarFunction(v:string):string{
   return i18n.global.t('msg.avatarFunctions.' + v)
 }
 
-export function i18nGender(v:string):string{
+export function i18nGender(v:string | number):string{
+  if (typeof v === 'number'){
+    if (v === 0){
+      return i18n.global.t('msg.gender.Female')
+    }
+    return i18n.global.t('msg.gender.Male')
+  }
   return i18n.global.t('msg.gender.' + v)
 }
 
-export function i18nAccountStatus(v:string):string{
+export function i18nAccountStatus(v:string | number):string{
+  if (typeof v === 'number'){
+    if (v === 0){
+      return i18n.global.t('msg.accountStatus.unavailable')
+    }
+    return i18n.global.t('msg.accountStatus.available')
+  }
   return i18n.global.t('msg.accountStatus.'+v)
 }
 
@@ -53,13 +65,30 @@ export function SysI18n(v:string):string{
   return i18n.global.t('msg.'+v)
 }
 
+export function i18nDeleteStatus(v:string | number):string{
+  if (typeof v === 'number'){
+    if (v === 0){
+      return i18n.global.t('msg.DeleteStatus.deleted')
+    }
+    return i18n.global.t('msg.DeleteStatus.exists')
+  }
+  return i18n.global.t('msg.DeleteStatus.' + v)
+}
+
+export function i18nUserQuery(v:string):string{
+  if (v === 'page' || v==='size'){
+    return "";
+  }
+  return i18n.global.t('msg.userQuery.'+v)
+}
+
 export function watchSwitchLang(...cbs:any){
-  //@ts-ignore
-  const store = useAppStore()
+
+  const appStore = useAppStoreOutside()
   watch(
-    ()=>store.getAppLanguage,
+    ()=>appStore.getAppLanguage,
     ()=>{
-      cbs.forEach((cb:any)=>cb(store.getAppLanguage))
+      cbs.forEach((cb:any)=>cb(appStore.getAppLanguage))
     }
   )
 }

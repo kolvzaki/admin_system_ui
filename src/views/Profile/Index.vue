@@ -162,11 +162,14 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserStore } from "@/store";
 import moment from "moment";
 import { profileUpdate,passwordUpdate } from "@/api";
+import globalHooks from "@/utils/globalHooks";
 
 const editShow = ref(false);
 const securityShow = ref(false);
 const passEditShow = ref(false);
 const userStore = useUserStore();
+
+const hooks = globalHooks()
 
 let passForm: IPassForm = reactive<IPassForm>({
   confirmPass: "",
@@ -184,18 +187,8 @@ let backup = computed(() => {
 
 const role = userStore.getRoles;
 const permission = userStore.getPermissions;
-const dateFormat = "YYYY/MM/D HH:mm:ss z";
-
-const genderOptions = [
-  {
-    label: i18nGender("Male"),
-    value: 1
-  },
-  {
-    label: i18nGender("Female"),
-    value: 0
-  }
-];
+const dateFormat = hooks.dateFormat
+const genderOptions = hooks.genderOptions
 const rpVal = ref('role')
 
 const initPassForm = () => {
@@ -252,90 +245,6 @@ const excludeInput = (o: string) => {
 </script>
 
 <style scoped lang="scss">
-.profile-contain {
-  @apply w-full h-max;
-  .profile-card {
-    @apply relative w-full h-full;
-    .card-header {
-      @apply h-4 flex items-center justify-between;
-      .operation-contain {
-        @apply w-max h-max;
-      }
-    }
-
-    .card-content {
-      @apply h-full w-full flex items-center;
-      .info-contain {
-        @apply w-full pl-5;
-      }
-
-      .el-avatar {
-        @apply cursor-pointer;
-      }
-    }
-  }
-}
-
-.edit-card {
-  @apply mt-10 w-full h-max;
-  transition: ease-in-out all .5s;
-
-  .part-title {
-    @apply select-none;
-    color: #CC3399;
-  }
-
-  .info-part {
-    @apply w-full h-max;
-    .edit-form {
-      @apply mt-3;
-    }
-
-    .edit-collapse {
-      @apply mt-5;
-    }
-    .edit-button-contain {
-      @apply w-max h-max relative;
-      margin: 0 auto;
-    }
-
-    .security-button-contain {
-      @apply block mt-3;
-    }
-  }
-}
-
-.rp-contain{
-  @apply py-5;
-  .rp-tag{
-    @apply mx-2;
-  }
-}
-
-.editAnime-enter-from,
-.editAnime-leave-to {
-  transform: translateY(30px);
-}
-
-.editAnime-leave-active {
-  position: absolute;
-}
-
-
-.editAnime-enter-active {
-  animation: zoomIn 1s;
-}
-
-.editAnime-leave-active {
-  animation: zoomOut 1s;
-}
-
-.dialogAnime-enter-active {
-  animation: zoomIn .5s;
-}
-
-.dialogAnime-leave-active {
-  animation: zoomOut .5s;
-}
+@import "style/index";
 
 </style>
