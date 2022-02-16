@@ -12,6 +12,6 @@ export interface IProfile{
   isAvailable:number,
   lastLoginTime: Date,
   updateTime:Date,
-  createdTile:Date
+  createdTime:Date
 
 }

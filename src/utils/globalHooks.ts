@@ -1,5 +1,6 @@
 import { i18nGender } from "@/utils/i18n";
 import moment from "moment";
+import { reactive, Component, toRefs, ref } from "vue";
 
 export default function(){
   const dateFormat = "YYYY/MM/D HH:mm:ss z";
@@ -20,6 +21,6 @@ export default function(){
   return {
     dateFormat,
     formatDate,
-    genderOptions
+    genderOptions,
   }
 }

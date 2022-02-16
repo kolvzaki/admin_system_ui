@@ -46,6 +46,9 @@ const useUserStore = defineStore({
       },
       getInfo(state){
         return state.info
+      },
+      getAvatar(state){
+        return state.info.avatar || ""
       }
 
     }

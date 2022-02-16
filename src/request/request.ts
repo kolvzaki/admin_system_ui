@@ -2,8 +2,8 @@ import axios,{AxiosResponse,AxiosRequestConfig} from 'axios'
 import { ElMessage as message, ElLoading as loading} from "element-plus";
 
 
-import useUserStore from "@/store/modules/useUserStore";
-import { useRouter } from "vue-router";
+import { useUserStoreOutside } from "@/store/modules/useUserStore";
+import router from "@/router";
 import { Local, Session } from "@/utils/storage";
 
 let reload:{close():void};
@@ -27,7 +27,7 @@ service.interceptors.request.use(
       spinner: 'el-icon-loading',
     })
 
-    const userStore = useUserStore();
+    const userStore = useUserStoreOutside();
     const token = userStore.getToken
 
     if(token && config.headers){
@@ -44,11 +44,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response:AxiosResponse<SysResponse>) =>{
     const res = response.data
-    const router = useRouter()
-
     reload.close()
     if(res.code !== 200){
-
       if (res.code === 401){
         router.push('/login')
       }

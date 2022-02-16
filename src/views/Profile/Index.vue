@@ -1,5 +1,4 @@
 <template>
-  <el-scrollbar>
     <div class="profile-contain">
       <el-card class="profile-card">
         <template #header>
@@ -24,7 +23,8 @@
         </template>
         <div class="card-content">
           <el-avatar :src="profile.avatar" :size="256" alt="Avatar" fit="fill" shape="square"
-                     class="hvr-pop"></el-avatar>
+                     class="hvr-pop">
+          </el-avatar>
           <div class="info-contain">
             <el-descriptions border :column="4" direction="vertical" size="large">
               <el-descriptions-item :label="i18nProfile('username')" align="center">{{ profile.username }}
@@ -133,15 +133,15 @@
       <el-dialog v-model="passEditShow" center>
         <el-form ref="passFormRef" label-width="100px" :model="passForm">
           <el-form-item :label="i18nProfile('security.oldPass')">
-            <el-input v-model="passForm.password"></el-input>
+            <el-input v-model="passForm.oldPass" type="password"></el-input>
           </el-form-item>
 
           <el-form-item :label="i18nProfile('security.newPass')">
-            <el-input v-model="passForm.newPass"></el-input>
+            <el-input v-model="passForm.newPass" type="password"></el-input>
           </el-form-item>
 
           <el-form-item :label="i18nProfile('security.confirm')">
-            <el-input v-model="passForm.confirmPass"></el-input>
+            <el-input v-model="passForm.confirmPass" type="password"> </el-input>
           </el-form-item>
         </el-form>
         <template #footer>
@@ -150,7 +150,6 @@
         </template>
       </el-dialog>
     </div>
-  </el-scrollbar>
 </template>
 
 <script setup lang="ts">
@@ -174,7 +173,7 @@ const hooks = globalHooks()
 let passForm: IPassForm = reactive<IPassForm>({
   confirmPass: "",
   newPass: "",
-  password: ""
+  oldPass: ""
 });
 
 let profile = computed(() => {

@@ -77,8 +77,11 @@ export default {
   },
 
   userQuery:{
+    id:'ID',
     username: '账号',
     nickname: '姓名',
+    password: '密码',
+    avatar: '头像',
     gender: '性别',
     mobile:'联系电话',
     email:'联系邮箱',
@@ -91,6 +94,13 @@ export default {
     updateTime: '上次更新时间',
     createdTime: '创建时间',
   },
+
+  roleQuery:{
+    id:'id',
+    name: '角色名称',
+    remark: '备注'
+  },
+
 
   charts:{
     title:'近期数据'

@@ -50,8 +50,14 @@ const iconName = computed(()=> `#icon-${props.icon}`)
   @apply w-5 h-5;
 }
 
+.pics-icon{
+  @apply w-24 h-24;
+}
+
 .button-icon{
-  @apply ml-1 ;
+  @apply relative ml-1 left-1;
+  width: 12px;
+  height: 12px;
 }
 
 .data-icon{

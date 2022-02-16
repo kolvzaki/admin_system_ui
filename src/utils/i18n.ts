@@ -75,6 +75,10 @@ export function i18nDeleteStatus(v:string | number):string{
   return i18n.global.t('msg.DeleteStatus.' + v)
 }
 
+export function i18nRoleQuery(v:string):string{
+  return i18n.global.t('msg.roleQuery.' + v)
+}
+
 export function i18nUserQuery(v:string):string{
   if (v === 'page' || v==='size'){
     return "";

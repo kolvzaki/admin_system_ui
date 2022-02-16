@@ -1,5 +1,5 @@
 export interface IPassForm{
-  password:string,
+  oldPass:string,
   newPass:string,
   confirmPass:string
 }

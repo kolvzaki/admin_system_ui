@@ -1,11 +1,10 @@
-export interface User{
+export interface IUser{
   username:string,
   nickname: string,
   gender:  number,
   mobile:string,
   email:string,
-  minAge: number,
-  maxAge:  number,
+  age: number
   introduce:string,
   isAvailable: number,
   isDeleted: number,

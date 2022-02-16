@@ -1,5 +1,5 @@
 import service from "@/request/request";
-import { queryModel } from "@/views/System/User/types/types";
+import { IUser, queryModel } from "@/views/System/User/types/types";
 
 const api = {
   loginByForm: "/user/login",
@@ -7,7 +7,10 @@ const api = {
   logout: "/user/logout",
   profileUpdate: '/profile/update',
   passwordUpdate: '/profile/pwdUpdate',
-  getUsers: '/user/queryUsers'
+  getUsers: '/user/queryUsers',
+  createUser: '/user/create',
+  updateUser: '/user/update',
+  deleteUser: '/user/delete'
 }
 
 export function loginByForm(data:object){
@@ -26,9 +29,22 @@ export function passwordUpdate(data:object){
   return service.post(api.passwordUpdate,data)
 }
 
+//TODO: create a field to get user's role.
 export function getUsers(query:queryModel){
   return service.get(api.getUsers,{
     params:query
   })
 }
+export function CreateUser(data:object){
+  return service.post(api.createUser,data)
+}
 
+export function UpdateUser(data:IUser){
+  return service.post(api.updateUser + `/${data?.username}`,data)
+}
+
+export function DeleteUser(username:string,param:number){
+  return service.get(api.deleteUser+`/${username}`,{
+    params:param
+  })
+}

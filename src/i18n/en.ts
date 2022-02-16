@@ -81,6 +81,7 @@ export default {
     MoneyData:'Daily Income'
   },
   userQuery:{
+    id:'ID',
     username: 'Username',
     nickname: 'Nickname',
     gender: 'Gender',
@@ -94,6 +95,13 @@ export default {
     updateTime: 'Update Time',
     createdTime: 'Created Time',
     isDeleted: 'Exist',
+    password: 'Password',
+    avatar: 'Avatar',
+  },
+  roleQuery:{
+    id:'id',
+    name: 'Role Name',
+    remark: 'Remark'
   },
   charts:{
     title: 'Recent Data'

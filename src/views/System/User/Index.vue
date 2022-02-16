@@ -10,10 +10,7 @@
         </el-form-item>
         <el-form-item style="margin-left: -10px;">
           <el-button :size="componentSize" type="primary" icon="search" @click="queryUser"></el-button>
-          <el-button :size="componentSize" type="success">
-            Create
-          </el-button>
-          <el-button :size="componentSize" type="warning">Reset</el-button>
+          <el-button :size="componentSize" type="success" @click="createUser" icon="plus"/>
         </el-form-item>
       </el-form>
     </div>
@@ -32,7 +29,7 @@
         <el-table-column prop="email" :label="i18nUserQuery('email')" align="center"></el-table-column>
         <el-table-column :label="i18nUserQuery('lastLoginTime')" width="200" align="center">
           <template #default="scope">
-            {{ global.formatDate(scope.row.lastLoginTime) }}
+            {{ formatDate(scope.row.lastLoginTime) }}
           </template>
         </el-table-column>
         <!--        <el-table-column prop="createdTime" :label="i18nUserQuery('createdTime')" width="200" align="center">
@@ -64,33 +61,102 @@
         </el-table-column>
         <el-table-column align="center">
           <template #default="scope">
-            <el-tooltip placement="left" content="update">
-              <el-button icon="edit" type="primary" :size="componentSize" />
-            </el-tooltip>
-            <el-tooltip placement="right" content="delete">
-              <el-button type="danger" icon="delete" :size="componentSize" />
-            </el-tooltip>
+            <el-button icon="edit" type="primary" :size="componentSize" @click="updateUser(scope.row)" />
+            <el-button type="danger" icon="delete" :size="componentSize" @click="deleteUser(scope.row)" />
           </template>
         </el-table-column>
-
       </el-table>
     </div>
+
+    <div class="pagination-contain">
+      <el-pagination background
+                     @size-change="handleSizeChange" @current-change="handlePageChange"
+                     layout="total, sizes, prev, pager, next, jumper"
+                     :page-size="query.size" :current-page="query.page" :total="total" :page-sizes="sizes">
+      </el-pagination>
+    </div>
+
+
+    <sys-dialog :is-show="isShow" :title="title" :view="view" :p="currentUser" @cancelDialog="cancelDialog"></sys-dialog>
+
   </div>
 </template>
 
 <script setup lang="ts">
+
+//TODO:Add a Role Column in form.
+
 import useModel from "./hooks/useModel";
 
-import { i18nGender, i18nProfile, i18nUserQuery, i18nDeleteStatus, watchSwitchLang } from "@/utils/i18n";
-import { onMounted, ref } from "vue";
+import { i18nGender, i18nProfile, i18nUserQuery, i18nDeleteStatus,SysI18n, watchSwitchLang } from "@/utils/i18n";
+import { defineAsyncComponent, onMounted, ref, markRaw, computed, watch, reactive } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { getUsers } from "@/api";
+import { DeleteUser, getUsers } from "@/api";
+import SysDialog from "@/components/common/SysDialog.vue";
 import globalHooks from "@/utils/globalHooks";
+import { IUser } from "@/views/System/User/types/types";
+import { ElMessage as message } from "element-plus";
 
+const { formatDate} = globalHooks()
 const componentSize = ref("mini");
-
 const model = useModel();
-const global = globalHooks();
+const isShow = ref(false)
+const title = ref('')
+const view = ref({})
+const sizes = ref([1,5,10,15,20,30])
+
+const currentUser = ref({})
+const tableData = ref([]);
+const total = ref(0);
+
+onMounted(async () => {
+  await getUsers(query).then(res => {
+    const { data } = res;
+    tableData.value = data.list;
+    total.value = data.total || 0;
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+const createUser = () =>{
+  isShow.value = true
+  title.value = 'User Create'
+  view.value = markRaw(defineAsyncComponent(() => import('./User-Create.vue')))
+}
+
+const updateUser = (data:object) =>{
+  isShow.value = true
+  title.value = 'User Update'
+  currentUser.value = data
+  view.value = markRaw(defineAsyncComponent(() => import('./User-Update.vue')))
+}
+
+const deleteUser = (data:IUser) =>{
+  DeleteUser(data.username,0).then(res=>{
+    message.success('删除成功')
+  })
+  .then(err=>{
+    console.log(err);
+  })
+  queryUser()
+}
+
+
+const queryUser = async () => {
+  await getUsers(query).then(res => {
+    const { data } = res;
+    tableData.value = data.list;
+    total.value = data.total;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+const cancelDialog = () =>{
+  isShow.value = false
+  queryUser()
+}
 
 const query = model.query;
 const queryOptions = model.queryOptions;
@@ -109,29 +175,18 @@ const isPage = (o: string) => {
   return pageQuery.indexOf(o) !== -1;
 };
 
-const tableData = ref([]);
-const total = ref(0);
 
-onMounted(async () => {
-  await getUsers(query).then(res => {
-    const { data } = res;
-    tableData.value = data.list;
-    total.value = data.total || 0;
-  }).catch(err => {
-    console.log(err);
-  });
-  console.log(tableData.value);
-});
 
-const queryUser = async () => {
-  await getUsers(query).then(res => {
-    const { data } = res;
-    tableData.value = data.list;
-    total.value = data.total || 0;
-  }).catch(err => {
-    console.log(err);
-  });
-};
+const handleSizeChange = (val:number) =>{
+  query.size = val
+  queryUser()
+}
+
+const handlePageChange = (val:number) =>{
+  query.page = val
+  queryUser()
+}
+
 
 </script>
 
@@ -145,6 +200,14 @@ const queryUser = async () => {
 
   .table-contain {
     @apply transition-all;
+  }
+  .button-contain{
+    @apply w-max h-max;
+    margin: 0 auto;
+  }
+  .pagination-contain{
+    @apply w-max h-max pt-5;
+    margin: 0 auto;
   }
 }
 

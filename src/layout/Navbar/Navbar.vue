@@ -43,7 +43,7 @@
     }
   }
 
-  const squareUrl = ref( 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',)
+
 
 </script>
 
@@ -77,7 +77,7 @@
   <div class="right-menu">
     <div class="avatar-function">
       <el-dropdown @command="handleCommand">
-        <el-avatar shape="square" :size="50" :src="squareUrl"></el-avatar>
+        <el-avatar shape="square" :size="45" class="avatar-contain" :src="userStore.getAvatar"></el-avatar>
         <template #dropdown>
           <el-dropdown-menu >
             <el-dropdown-item>Action 1</el-dropdown-item>
@@ -104,6 +104,12 @@
     @apply h-full w-max flex items-center justify-center;
     .avatar-function{
       @apply px-4 py-2;
+      .avatar-contain{
+        @apply relative top-1;
+      }
+      &:hover{
+        animation: tada 1s;
+      }
     }
     .theme-settings{
       @apply cursor-pointer;
