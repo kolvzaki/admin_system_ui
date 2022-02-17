@@ -1,0 +1,86 @@
+.role-contain {
+  @apply w-full h-full overflow-hidden;
+  transition: all ease 1s;
+
+  .top-contain {
+    @apply w-full h-max flex;
+    .query-contain {
+      @apply w-max h-max flex;
+      .query {
+        @apply mr-2;
+      }
+    }
+  }
+
+  .table-contain {
+    @apply w-full h-max mt-3;
+  }
+
+  .permission-show-contain {
+    @apply  h-max mt-3 w-full relative;
+    .card-header{
+      @apply h-5 flex items-center  justify-between;
+      .title-contain{
+        @apply inline-block flex items-center p-1 ;
+      }
+    }
+    .card-content{
+      @apply w-full flex items-center flex-wrap;
+
+      .selector-contain{
+        @apply w-max h-max;
+        .selector-icon{
+          @apply transition-all cursor-pointer inline-block w-max h-max p-1 relative right-2;
+          &:hover{
+            color: red;
+          }
+        }
+      }
+      .permission-tags{
+        @apply mx-2 cursor-default;
+        transition: all ease-in .4s;
+        &:hover{
+          @apply text-white;
+          background: var(--el-color-primary-light-4);
+          &:last-child{
+            @apply cursor-pointer text-white;
+          }
+        }
+        .tags-text{
+          @apply text-base inline-block;
+        }
+      }
+    }
+  }
+
+  .pagination-contain{
+    @apply w-max h-max mx-auto my-10 transition-all;
+  }
+}
+
+.tagsAnime-enter-from,
+.tagsAnime-leave-to{
+  opacity: 0;
+}
+
+.tagsAnime-leave-active {
+  animation: slideOutDown .5s;
+}
+.tagsAnime-enter-active{
+  animation: zoomIn .5s;
+}
+
+.RolePermissionCardAnime-enter-from,
+.RolePermissionCardAnime-leave-to{
+  opacity: 0;
+}
+
+.RolePermissionCardAnime-enter-active{
+  animation: slideInUp .5s;
+}
+
+.RolePermissionCardAnime-leave-active{
+  animation: slideOutDown 1s;
+}
+
+

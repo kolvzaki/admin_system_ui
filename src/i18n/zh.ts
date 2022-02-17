@@ -95,6 +95,14 @@ export default {
     createdTime: '创建时间',
   },
 
+
+  permissionQuery:{
+    id:'id',
+    name: '权限名称',
+    remark: '备注'
+  },
+
+
   roleQuery:{
     id:'id',
     name: '角色名称',

@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Local, Session} from "@/utils/storage";
+import {Session} from "@/utils/storage";
 import pinia from "@/store";
 
 

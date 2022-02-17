@@ -66,8 +66,9 @@ const iconName = computed(()=> `#icon-${props.icon}`)
 }
 
 .title-icon{
-  width: 18px;
-  height: 18px;
+  @apply mr-2;
+  width: 24px;
+  height: 24px;
 }
 
 .navbar-icon{

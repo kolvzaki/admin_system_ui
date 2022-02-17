@@ -10,7 +10,7 @@
         </el-form-item>
         <el-form-item style="margin-left: -10px;">
           <el-button :size="componentSize" type="primary" icon="search" @click="queryUser"></el-button>
-          <el-button :size="componentSize" type="success" @click="createUser" icon="plus"/>
+          <el-button :size="componentSize" type="success" @click="createUser" icon="plus" />
         </el-form-item>
       </el-form>
     </div>
@@ -72,12 +72,13 @@
       <el-pagination background
                      @size-change="handleSizeChange" @current-change="handlePageChange"
                      layout="total, sizes, prev, pager, next, jumper"
-                     :page-size="query.size" :current-page="query.page" :total="total" :page-sizes="sizes">
+                     :page-size="query.size" :current-page="query.page" :total="total" :page-sizes="pageSizes">
       </el-pagination>
     </div>
 
 
-    <sys-dialog :is-show="isShow" :title="title" :view="view" :p="currentUser" @cancelDialog="cancelDialog"></sys-dialog>
+    <sys-dialog :is-show="dialogOption.isShow" :title="dialogOption.title" :view="dialogOption.view" :p="dialogOption.p"
+                @cancelDialog="cancelDialog"></sys-dialog>
 
   </div>
 </template>
@@ -88,7 +89,7 @@
 
 import useModel from "./hooks/useModel";
 
-import { i18nGender, i18nProfile, i18nUserQuery, i18nDeleteStatus,SysI18n, watchSwitchLang } from "@/utils/i18n";
+import { i18nGender, i18nProfile, i18nUserQuery, i18nDeleteStatus, SysI18n, watchSwitchLang } from "@/utils/i18n";
 import { defineAsyncComponent, onMounted, ref, markRaw, computed, watch, reactive } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import { DeleteUser, getUsers } from "@/api";
@@ -97,17 +98,10 @@ import globalHooks from "@/utils/globalHooks";
 import { IUser } from "@/views/System/User/types/types";
 import { ElMessage as message } from "element-plus";
 
-const { formatDate} = globalHooks()
-const componentSize = ref("mini");
-const model = useModel();
-const isShow = ref(false)
-const title = ref('')
-const view = ref({})
-const sizes = ref([1,5,10,15,20,30])
+const { formatDate,pageSizes,dialogOption,componentSize } = globalHooks();
 
-const currentUser = ref({})
-const tableData = ref([]);
-const total = ref(0);
+const {tableData,total,query,queryOptions} = useModel()
+
 
 onMounted(async () => {
   await getUsers(query).then(res => {
@@ -119,28 +113,28 @@ onMounted(async () => {
   });
 });
 
-const createUser = () =>{
-  isShow.value = true
-  title.value = 'User Create'
-  view.value = markRaw(defineAsyncComponent(() => import('./User-Create.vue')))
-}
+const createUser = () => {
+  dialogOption.isShow = true;
+  dialogOption.title= "User Create";
+  dialogOption.view = markRaw(defineAsyncComponent(() => import("./User-Create.vue")));
+};
 
-const updateUser = (data:object) =>{
-  isShow.value = true
-  title.value = 'User Update'
-  currentUser.value = data
-  view.value = markRaw(defineAsyncComponent(() => import('./User-Update.vue')))
-}
+const updateUser = (data: object) => {
+  dialogOption.isShow = true;
+  dialogOption.title = "User Update";
+  dialogOption.p = data;
+  dialogOption.view = markRaw(defineAsyncComponent(() => import("./User-Update.vue")));
+};
 
-const deleteUser = (data:IUser) =>{
-  DeleteUser(data.username,0).then(res=>{
-    message.success('删除成功')
+const deleteUser = (data: IUser) => {
+  DeleteUser(data.username, 0).then(res => {
+    message.success("删除成功");
   })
-  .then(err=>{
-    console.log(err);
-  })
-  queryUser()
-}
+    .then(err => {
+      console.log(err);
+    });
+  queryUser();
+};
 
 
 const queryUser = async () => {
@@ -153,13 +147,10 @@ const queryUser = async () => {
   });
 };
 
-const cancelDialog = () =>{
-  isShow.value = false
-  queryUser()
-}
-
-const query = model.query;
-const queryOptions = model.queryOptions;
+const cancelDialog = () => {
+  dialogOption.isShow = false;
+  queryUser();
+};
 
 const inputList = ["username", "email", "mobile"];
 const isInput = (o: string) => {
@@ -176,16 +167,15 @@ const isPage = (o: string) => {
 };
 
 
+const handleSizeChange = (val: number) => {
+  query.size = val;
+  queryUser();
+};
 
-const handleSizeChange = (val:number) =>{
-  query.size = val
-  queryUser()
-}
-
-const handlePageChange = (val:number) =>{
-  query.page = val
-  queryUser()
-}
+const handlePageChange = (val: number) => {
+  query.page = val;
+  queryUser();
+};
 
 
 </script>
@@ -201,11 +191,13 @@ const handlePageChange = (val:number) =>{
   .table-contain {
     @apply transition-all;
   }
-  .button-contain{
+
+  .button-contain {
     @apply w-max h-max;
     margin: 0 auto;
   }
-  .pagination-contain{
+
+  .pagination-contain {
     @apply w-max h-max pt-5;
     margin: 0 auto;
   }

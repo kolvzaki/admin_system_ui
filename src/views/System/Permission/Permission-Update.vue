@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <el-form v-model="props.p">
-      <el-form-item v-for="o in Object.keys(props.p)" label-width="100px" :label="i18nRoleQuery(o)">
+      <el-form-item v-for="o in Object.keys(props.p)" label-width="100px" :label="i18nPermissionQuery(o)">
         <el-input v-if="o !== 'id'" v-model="props.p[o]"></el-input>
         <el-input v-else disabled v-model="props.p[o]"></el-input>
       </el-form-item>
     </el-form>
     <div class="button-contain">
-      <el-button type="primary" :size="componentSize" @click="updateRole(props.p)">
+      <el-button type="primary" :size="componentSize" @click="permissionUpdate(props.p)">
         {{SysI18n('button.confirm')}}
       </el-button>
       <el-button :size="componentSize" @click="cancelUpdate" >
@@ -18,30 +18,25 @@
 </template>
 
 <script setup lang="ts">
-import RoleHooks from "./hooks/useRole";
-import {i18nRoleQuery,SysI18n} from "@/utils/i18n";
-import { ref } from "vue";
-import { IRole } from "@/views/System/Role/types/types";
 import globalHooks from "@/utils/globalHooks";
+import usePermission from "@/views/System/Permission/hooks/usePermission";
+import { IPermission } from "@/views/System/Permission/types/types";
+import {i18nPermissionQuery,SysI18n} from "@/utils/i18n"
 
 const {componentSize} = globalHooks()
-const {roleUpdate} = RoleHooks()
+const {permissionUpdate} = usePermission()
+
 const props = withDefaults(defineProps<{
-  p:IRole
+  p:IPermission
 }>(),{
   p:()=>{
     return {
-      id:0,
+      id:'',
       name:'',
       remark:''
     }
   }
 })
-
-const updateRole = async (data:IRole) => {
-  await roleUpdate(data)
-  cancelUpdate()
-}
 
 const emit = defineEmits(
   ['cancel']
@@ -50,6 +45,7 @@ const emit = defineEmits(
 const cancelUpdate = ()=>{
   emit('cancel')
 }
+
 
 </script>
 
@@ -62,5 +58,7 @@ const cancelUpdate = ()=>{
     margin: 0 auto;
   }
 }
+
+
 
 </style>

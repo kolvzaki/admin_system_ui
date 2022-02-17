@@ -1,29 +1,77 @@
-import { reactive } from "vue";
+import { reactive, ref, defineEmits, onBeforeMount } from "vue";
+import { createRole, deleteRole, queryRole, updateRole } from "@/api/role";
+import { IRole, IRoleQuery } from "@/views/System/Role/types/types";
+import useRolePermission from "@/views/System/Role/hooks/useRolePermission";
+import { ElMessage as message } from "element-plus";
 
-export default function(){
+export default function() {
 
-  interface IRole{
-    name:string,
-    remark:string
-  }
+  let RoleModel: IRole = reactive({
+    id: 0,
+    name: "",
+    remark: ""
+  });
 
-  let RoleModel:IRole = reactive({
-    name:"",
-    remark:""
-  })
+  const { RolePermissions, showRolePermission } = useRolePermission();
 
-  const CreateRole = (data:IRole) =>{
-    console.log(data);
-  }
+  const tableData = ref([]);
+  const total = ref(0);
 
-  const UpdateRole = (data:IRole)=>{
-    console.log(data);
-  }
+  const query = reactive<IRoleQuery>({
+    page: 1,
+    size: 5,
+    param: ""
+  });
+
+  const roleQuery = (query: IRoleQuery) => {
+    queryRole(query).then(res => {
+      const { data } = res;
+      tableData.value = data.list;
+      total.value = data.total;
+    }).catch(err => {
+      console.log(err);
+    });
+    RolePermissions.value = [];
+    showRolePermission.value = false;
+  };
+
+  const roleDelete = async (data: IRole) => {
+    await deleteRole(data).then(res => {
+      console.log(res);
+      message.success("Delete success");
+      roleQuery(query)
+    }).catch(err => {
+      console.log(err);
+    });
+    roleQuery(query);
+  };
+
+  const roleUpdate = async (data: IRole) => {
+    await updateRole(data).then(res => {
+      message.success("Update success");
+    }).catch(err => {
+      console.log(err);
+    });
+
+  };
+
+  const roleCreate = async (data: IRole) => {
+    await createRole(data).then(res => {
+      message.success("Create Success");
+    }).catch(err => {
+      console.log(err);
+    });
+  };
 
   return {
     RoleModel,
-    CreateRole,
-    UpdateRole
-  }
+    query,
+    tableData,
+    total,
+    roleQuery,
+    roleDelete,
+    roleUpdate,
+    roleCreate
+  };
 
 }

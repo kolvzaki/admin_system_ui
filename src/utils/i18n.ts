@@ -86,6 +86,12 @@ export function i18nUserQuery(v:string):string{
   return i18n.global.t('msg.userQuery.'+v)
 }
 
+
+export function i18nPermissionQuery(v:string):string{
+  return i18n.global.t('msg.permissionQuery.' + v)
+}
+
+
 export function watchSwitchLang(...cbs:any){
 
   const appStore = useAppStoreOutside()

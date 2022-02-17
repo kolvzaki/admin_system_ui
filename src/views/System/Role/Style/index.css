@@ -1,0 +1,59 @@
+.role-contain {
+  @apply w-full h-full overflow-hidden;
+  transition: all ease 1s; }
+  .role-contain .top-contain {
+    @apply w-full h-max flex; }
+    .role-contain .top-contain .query-contain {
+      @apply w-max h-max flex; }
+      .role-contain .top-contain .query-contain .query {
+        @apply mr-2; }
+  .role-contain .table-contain {
+    @apply w-full h-max mt-3; }
+  .role-contain .permission-show-contain {
+    @apply h-max mt-3 w-full relative; }
+    .role-contain .permission-show-contain .card-header {
+      @apply h-5 flex items-center  justify-between; }
+      .role-contain .permission-show-contain .card-header .title-contain {
+        @apply inline-block flex items-center p-1; }
+    .role-contain .permission-show-contain .card-content {
+      @apply w-full flex items-center flex-wrap; }
+      .role-contain .permission-show-contain .card-content .selector-contain {
+        @apply w-max h-max; }
+        .role-contain .permission-show-contain .card-content .selector-contain .selector-icon {
+          @apply transition-all cursor-pointer inline-block w-max h-max p-1 relative right-2; }
+          .role-contain .permission-show-contain .card-content .selector-contain .selector-icon:hover {
+            color: red; }
+      .role-contain .permission-show-contain .card-content .permission-tags {
+        @apply mx-2 cursor-default;
+        transition: all ease-in .4s; }
+        .role-contain .permission-show-contain .card-content .permission-tags:hover {
+          @apply text-white;
+          background: var(--el-color-primary-light-4); }
+          .role-contain .permission-show-contain .card-content .permission-tags:hover:last-child {
+            @apply cursor-pointer text-white; }
+        .role-contain .permission-show-contain .card-content .permission-tags .tags-text {
+          @apply text-base inline-block; }
+  .role-contain .pagination-contain {
+    @apply w-max h-max mx-auto my-10 transition-all; }
+
+.tagsAnime-enter-from,
+.tagsAnime-leave-to {
+  opacity: 0; }
+
+.tagsAnime-leave-active {
+  animation: slideOutDown .5s; }
+
+.tagsAnime-enter-active {
+  animation: zoomIn .5s; }
+
+.RolePermissionCardAnime-enter-from,
+.RolePermissionCardAnime-leave-to {
+  opacity: 0; }
+
+.RolePermissionCardAnime-enter-active {
+  animation: slideInUp .5s; }
+
+.RolePermissionCardAnime-leave-active {
+  animation: slideOutDown 1s; }
+
+/*# sourceMappingURL=index.css.map */

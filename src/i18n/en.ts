@@ -98,6 +98,13 @@ export default {
     password: 'Password',
     avatar: 'Avatar',
   },
+
+  permissionQuery:{
+    id:'id',
+    name: 'Permission Name',
+    remark: 'Remark'
+  },
+
   roleQuery:{
     id:'id',
     name: 'Role Name',

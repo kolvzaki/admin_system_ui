@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { i18nAccountStatus, i18nDeleteStatus, i18nGender, watchSwitchLang } from "@/utils/i18n";
 import { queryModel } from "@/views/System/User/types/types";
 
@@ -76,6 +76,10 @@ export default function(){
     gender: genderOptions
   }
 
+  const tableData = ref([]);
+  const total = ref(0);
+
+
   const unEditable = ['password','isAvailable','isDeleted','createdTime','createdTime','lastLoginTime','updateTime','id']
 
   const handleQueryData = (data:object) =>{
@@ -89,6 +93,8 @@ export default function(){
     queryOptions,
     userModel,
     unEditable,
+    tableData,
+    total,
   }
 
 }
