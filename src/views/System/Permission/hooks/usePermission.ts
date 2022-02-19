@@ -1,4 +1,4 @@
-import { IPermissionQuery, IPermission } from "../types/types";
+import { IPermissionQuery, IPermission } from "@/views/System/Permission/types/types";
 import { queryPermission,createPermission,updatePermission,deletePermission } from "@/api/permission";
 import { onMounted, reactive, ref } from "vue";
 import { ElMessage as message } from "element-plus";
@@ -20,6 +20,12 @@ export default function(){
   const tableData = ref<IPermission[]>([])
   const total = ref(0)
 
+  const initModel = () =>{
+    model.id =''
+    model.name = ''
+    model.remark = ''
+  }
+
   const permissionQuery = (query:IPermissionQuery) =>{
     queryPermission(query).then(res=>{
       const {data} = res
@@ -33,7 +39,8 @@ export default function(){
   const permissionCreate = async(model:IPermission) =>{
     await createPermission(model).then(res=>{
       message.success('Create Success')
-      console.log(res);
+      //console.log(res);
+      initModel()
     }).catch(err=>{
       console.log(err);
     })

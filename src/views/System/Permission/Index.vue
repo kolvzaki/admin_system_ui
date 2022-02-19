@@ -9,32 +9,31 @@
     </div>
 
     <div class="table-contain">
-      <div class="table-contain">
-        <el-table :data="tableData" border style="width: 100%" highlight-current-row>
-          <el-table-column prop="id" :label="i18nPermissionQuery('id')" align="center" width="150"></el-table-column>
-          <el-table-column prop="name" :label="i18nPermissionQuery('name')" align="center" />
-          <el-table-column prop="remark" :label="i18nPermissionQuery('remark')" align="center" />
-          <el-table-column align="center">
-            <template #default="scope">
-              <el-button :size="componentSize" icon="refresh" @click="showUpdateDialog(scope.row)"
-              ></el-button
-              >
-              <el-popconfirm
-                @confirm="permissionDelete(scope.row)"
-                title="Are you sure to delete this permission?" icon="warning">
-                <template #reference>
-                  <el-button
-                    :size="componentSize"
-                    icon="delete"
-                    type="danger"
-                  ></el-button
-                  >
-                </template>
-              </el-popconfirm>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+
+      <el-table :data="tableData" border style="width: 100%" highlight-current-row>
+        <el-table-column prop="id" :label="i18nPermissionQuery('id')" align="center" width="150"></el-table-column>
+        <el-table-column prop="name" :label="i18nPermissionQuery('name')" align="center" />
+        <el-table-column prop="remark" :label="i18nPermissionQuery('remark')" align="center" />
+        <el-table-column align="center">
+          <template #default="scope">
+            <el-button :size="componentSize" icon="refresh" @click="showUpdateDialog(scope.row)"
+            ></el-button
+            >
+            <el-popconfirm
+              @confirm="permissionDelete(scope.row)"
+              title="Are you sure to delete this permission?" icon="warning">
+              <template #reference>
+                <el-button
+                  :size="componentSize"
+                  icon="delete"
+                  type="danger"
+                ></el-button
+                >
+              </template>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
 
       <div class="pagination-contain">
         <el-pagination
@@ -61,7 +60,7 @@ import { defineAsyncComponent, markRaw, onMounted, ref } from "vue";
 
 import usePermission from "@/views/System/Permission/hooks/usePermission";
 import SysDialog from "@/components/common/SysDialog.vue";
-import { IPermission } from "@/views/System/Permission/types";
+import { IPermission } from "@/views/System/Permission/types/types";
 
 const {componentSize,componentSizeOptions,pageSizes,dialogOption} = useGlobalHooks()
 const {model,query,tableData,total,permissionQuery,permissionDelete} = usePermission()

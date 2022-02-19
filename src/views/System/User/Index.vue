@@ -32,25 +32,30 @@
             {{ formatDate(scope.row.lastLoginTime) }}
           </template>
         </el-table-column>
-        <!--        <el-table-column prop="createdTime" :label="i18nUserQuery('createdTime')" width="200" align="center">
-                  <template #default="scope">
-                    {{global.formatDate(scope.row.createdTime)}}
-                  </template>
-                </el-table-column>
-                <el-table-column prop="isDeleted" :label="i18nUserQuery('isDeleted')" align="center" width="100">
-                  <template #default="scope">
-                    <el-tag v-if="scope.row.isDeleted === 1">
-                      {{i18nDeleteStatus('exists')}}
-                    </el-tag>
-                    <el-tag v-else>
-                      {{i18nDeleteStatus('deleted')}}
-                    </el-tag>
-                  </template>
-                </el-table-column>-->
+<!--        <el-table-column prop="createdTime" :label="i18nUserQuery('createdTime')" width="200" align="center">
+          <template #default="scope">
+            {{ formatDate(scope.row.createdTime) }}
+          </template>
+        </el-table-column>-->
+        <el-table-column prop="isDeleted" :label="i18nUserQuery('isDeleted')" align="center" width="100">
+          <template #default="scope">
+            <el-tag v-if="scope.row.isDeleted === 1">
+              {{ i18nDeleteStatus("exists") }}
+            </el-tag>
+            <el-tag v-else type="danger">
+              {{ i18nDeleteStatus("deleted") }}
+            </el-tag>
+          </template>
+        </el-table-column>
+
+        <el-table-column align="center" :label="i18nUserQuery('role')" prop="role_name">
+
+        </el-table-column>
+
         <el-table-column align="center" :label="i18nUserQuery('isAvailable')">
           <template #default="scope">
             <el-switch v-model="scope.row.isAvailable"
-                       :size="componentSize"
+                       :size="componentSize" @change="setAvailableStatus(scope.row)"
                        :active-value="1" :inactive-value="0"
                        active-color="#13ce66"
                        inactive-color="#ff4949"
@@ -62,7 +67,10 @@
         <el-table-column align="center">
           <template #default="scope">
             <el-button icon="edit" type="primary" :size="componentSize" @click="updateUser(scope.row)" />
-            <el-button type="danger" icon="delete" :size="componentSize" @click="deleteUser(scope.row)" />
+            <el-button type="danger" icon="delete" v-if="scope.row.isDeleted === 1 " :size="componentSize"
+                       @click="deleteUser(scope.row)" />
+            <el-button type="success" icon="check" v-else :size="componentSize"
+                       @click="restoreUser(scope.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -92,15 +100,15 @@ import useModel from "./hooks/useModel";
 import { i18nGender, i18nProfile, i18nUserQuery, i18nDeleteStatus, SysI18n, watchSwitchLang } from "@/utils/i18n";
 import { defineAsyncComponent, onMounted, ref, markRaw, computed, watch, reactive } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { DeleteUser, getUsers } from "@/api";
+import { DeleteUser, disableUser, getUsers } from "@/api";
 import SysDialog from "@/components/common/SysDialog.vue";
 import globalHooks from "@/utils/globalHooks";
 import { IUser } from "@/views/System/User/types/types";
 import { ElMessage as message } from "element-plus";
 
-const { formatDate,pageSizes,dialogOption,componentSize } = globalHooks();
+const { formatDate, pageSizes, dialogOption, componentSize } = globalHooks();
 
-const {tableData,total,query,queryOptions} = useModel()
+const { tableData, total, query, queryOptions } = useModel();
 
 
 onMounted(async () => {
@@ -108,6 +116,7 @@ onMounted(async () => {
     const { data } = res;
     tableData.value = data.list;
     total.value = data.total || 0;
+    //console.log(res.data);
   }).catch(err => {
     console.log(err);
   });
@@ -115,11 +124,11 @@ onMounted(async () => {
 
 const createUser = () => {
   dialogOption.isShow = true;
-  dialogOption.title= "User Create";
+  dialogOption.title = "User Create";
   dialogOption.view = markRaw(defineAsyncComponent(() => import("./User-Create.vue")));
 };
 
-const updateUser = (data: object) => {
+const updateUser = (data: IUser) => {
   dialogOption.isShow = true;
   dialogOption.title = "User Update";
   dialogOption.p = data;
@@ -129,13 +138,31 @@ const updateUser = (data: object) => {
 const deleteUser = (data: IUser) => {
   DeleteUser(data.username, 0).then(res => {
     message.success("删除成功");
+    queryUser();
   })
     .then(err => {
       console.log(err);
     });
-  queryUser();
 };
 
+const restoreUser = (data: IUser) => {
+  DeleteUser(data.username, 1).then(res => {
+    message.success("还原成功");
+    queryUser();
+  })
+    .then(err => {
+      console.log(err);
+    });
+};
+
+const setAvailableStatus = async(data:IUser) => {
+  await disableUser(data).then(res=>{
+    message.success('Success')
+  }).catch(err=>{
+    console.log(err);
+  })
+  queryUser()
+}
 
 const queryUser = async () => {
   await getUsers(query).then(res => {
@@ -156,7 +183,7 @@ const inputList = ["username", "email", "mobile"];
 const isInput = (o: string) => {
   return inputList.indexOf(o) !== -1;
 };
-const optionsList = ["isAvailable", "gender", "isDeleted"];
+const optionsList = ["isAvailable", "gender", "isDeleted",'role'];
 const isQueryOptions = (o: string) => {
   return optionsList.indexOf(o) !== -1;
 };

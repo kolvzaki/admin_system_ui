@@ -6,7 +6,7 @@ const exceptRoutes:RouteRecordRaw[] =[
   {
     path:'/exception',
     redirect:'/exception/404',
-    component: layout,
+    component: ()=>import("@/views/Exception/Index.vue"),
     meta:{
       icon: 'failed',
       title:'exception',

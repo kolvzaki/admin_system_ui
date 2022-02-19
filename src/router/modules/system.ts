@@ -10,7 +10,7 @@ const systemRoutes:RouteRecordRaw[] = [
       title: 'systemManage',
       icon: 'icon-park:computer',
       rank:4,
-      roles: ['sys_root']
+      roles: ['sys_root','sys:guard']
     },
     children:[
       {
@@ -20,7 +20,7 @@ const systemRoutes:RouteRecordRaw[] = [
         meta:{
           title: 'userManage',
           icon: 'emojione:blond-haired-person-medium-light-skin-tone',
-          roles: ['sys:root']
+          roles: ['sys:root','sys:guard']
         },
 
       },
@@ -31,9 +31,19 @@ const systemRoutes:RouteRecordRaw[] = [
         meta:{
           title: 'playGroundManage',
           icon: 'noto:umbrella-on-ground',
-          roles: ['sys:root']
+          roles: ['sys:root','sys:guard']
         },
 
+      },
+      {
+        path: '/system/order',
+        name: 'order_manage',
+        component: () => import('@/views/System/Order/Index.vue'),
+        meta:{
+          title: 'orderManage',
+          icon: 'icon-park-outline:transaction-order',
+          roles: ['sys:root','sys:guard']
+        }
       },
       {
         path: '/system/equipment',
@@ -42,7 +52,7 @@ const systemRoutes:RouteRecordRaw[] = [
         meta:{
           title: 'equipmentManage',
           icon: 'emojione:pool-8-ball',
-          roles: ['sys:root']
+          roles: ['sys:root','sys:guard']
         },
       },
       {

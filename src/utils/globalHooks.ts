@@ -1,10 +1,40 @@
-import { i18nGender } from "@/utils/i18n";
 import moment from "moment";
 import { reactive, markRaw, defineAsyncComponent, ref } from "vue";
 import { IDialog } from "@/interfaces/modules/global";
+import { i18nAccountStatus, i18nDeleteStatus, i18nGender, watchSwitchLang } from "@/utils/i18n";
 
 export default function(){
   const dateFormat = "YYYY/MM/D HH:mm:ss z";
+
+  watchSwitchLang(() => {
+    avaOptions.forEach(item=>{
+      item.label = i18nAccountStatus(item.value)
+    })
+    isDeletedOptions.forEach(item=>{
+      item.label = i18nDeleteStatus(item.value)
+    })
+  });
+
+  const avaOptions = [
+    {
+      label: i18nAccountStatus('available'),
+      value: 1
+    },
+    {
+      label: i18nAccountStatus('unavailable'),
+      value: 0
+    }
+  ];
+  const isDeletedOptions = [
+    {
+      label: i18nDeleteStatus('exists'),
+      value: 1
+    },
+    {
+      label: i18nDeleteStatus('deleted'),
+      value: 0
+    }
+  ];
   const genderOptions = [
     {
       label: i18nGender("Male"),
@@ -15,6 +45,11 @@ export default function(){
       value: 0
     }
   ];
+
+  const isDeletedType = (p:number) => {
+    return p === 1 ? 'primary':'danger'
+  }
+
   const formatDate = (v:string):string =>{
     return moment(v).format(dateFormat)
   }
@@ -40,6 +75,9 @@ export default function(){
     dateFormat,
     formatDate,
     genderOptions,
+    avaOptions,
+    isDeletedOptions,
+
     componentSize,
     componentSizeOptions,
     pageSizes,

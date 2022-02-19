@@ -6,7 +6,12 @@ const api = {
   createRole: '/role/create',
   queryRole: '/role/getRoles',
   deleteRole: '/role/delete',
-  updateRole: '/role/update'
+  updateRole: '/role/update',
+  getAllRoles: '/role/getAllRoles'
+}
+
+export const getAllRoles = () => {
+  return service.get(api.getAllRoles)
 }
 
 export const getRolePermissionsService = (param:number)=>{

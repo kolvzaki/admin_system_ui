@@ -10,7 +10,16 @@ const api = {
   getUsers: '/user/queryUsers',
   createUser: '/user/create',
   updateUser: '/user/update',
-  deleteUser: '/user/delete'
+  deleteUser: '/user/delete',
+  setUserAvailable: '/user/disable'
+}
+
+export function disableUser(data:IUser){
+  return service.get(api.setUserAvailable+`/${data.username}`,{
+    params:{
+      isAvailable:data.isAvailable
+    }
+  })
 }
 
 export function loginByForm(data:object){
@@ -45,6 +54,8 @@ export function UpdateUser(data:IUser){
 
 export function DeleteUser(username:string,param:number){
   return service.get(api.deleteUser+`/${username}`,{
-    params:param
+    params:{
+      'isDeleted': param
+    }
   })
 }

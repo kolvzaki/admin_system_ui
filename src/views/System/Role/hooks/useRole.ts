@@ -17,6 +17,7 @@ export default function() {
   const tableData = ref([]);
   const total = ref(0);
 
+
   const query = reactive<IRoleQuery>({
     page: 1,
     size: 5,
@@ -68,6 +69,7 @@ export default function() {
     query,
     tableData,
     total,
+
     roleQuery,
     roleDelete,
     roleUpdate,

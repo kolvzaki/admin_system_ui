@@ -86,6 +86,9 @@ export function i18nUserQuery(v:string):string{
   return i18n.global.t('msg.userQuery.'+v)
 }
 
+export function i18nGroundQuery(v:string):string{
+  return i18n.global.t('msg.groundQuery.'+v)
+}
 
 export function i18nPermissionQuery(v:string):string{
   return i18n.global.t('msg.permissionQuery.' + v)

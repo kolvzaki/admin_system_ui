@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <el-form v-model="props.p">
-      <el-form-item v-for="o in Object.keys(props.p)" label-width="100px" :label="i18nRoleQuery(o)">
-        <el-input v-if="o !== 'id'" v-model="props.p[o]"></el-input>
-        <el-input v-else disabled v-model="props.p[o]"></el-input>
+    <el-form v-model="data">
+      <el-form-item v-for="o in Object.keys(data)" label-width="100px" :label="i18nRoleQuery(o)">
+        <el-input v-if="o !== 'id'" v-model="data[o]"></el-input>
+        <el-input v-else disabled v-model="data[o]"></el-input>
       </el-form-item>
     </el-form>
     <div class="button-contain">
-      <el-button type="primary" :size="componentSize" @click="updateRole(props.p)">
+      <el-button type="primary" :size="componentSize" @click="updateRole(data)">
         {{SysI18n('button.confirm')}}
       </el-button>
       <el-button :size="componentSize" @click="cancelUpdate" >
@@ -20,12 +20,9 @@
 <script setup lang="ts">
 import RoleHooks from "./hooks/useRole";
 import {i18nRoleQuery,SysI18n} from "@/utils/i18n";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { IRole } from "@/views/System/Role/types/types";
-import globalHooks from "@/utils/globalHooks";
 
-const {componentSize} = globalHooks()
-const {roleUpdate} = RoleHooks()
 const props = withDefaults(defineProps<{
   p:IRole
 }>(),{
@@ -37,10 +34,12 @@ const props = withDefaults(defineProps<{
     }
   }
 })
+const componentSize = ref('mini')
 
-const updateRole = async (data:IRole) => {
-  await roleUpdate(data)
-  cancelUpdate()
+const data = reactive(JSON.parse(JSON.stringify(props.p)))
+
+const updateRole = (data:IRole) =>{
+  console.log(data);
 }
 
 const emit = defineEmits(

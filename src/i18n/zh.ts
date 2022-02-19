@@ -10,6 +10,7 @@ export default {
     roleManage: '角色管理',
     permissionManage: '权限管理',
 
+    orderManage : '订单管理',
     equipmentManage: '设备管理',
     exception: '异常页面',
     403: '403',
@@ -77,38 +78,46 @@ export default {
   },
 
   userQuery:{
-    id:'ID',
+    id:'id',
+    rid: 'rid',
     username: '账号',
     nickname: '姓名',
-    password: '密码',
-    avatar: '头像',
     gender: '性别',
+    avatar: '头像',
     mobile:'联系电话',
     email:'联系邮箱',
     minAge:'最小年龄',
     maxAge: '最大年龄',
+    role: '角色',
+    role_name: '角色',
     introduce:'自我介绍',
     isAvailable: '账号状态',
     isDeleted: '存在',
     lastLoginTime: '上次登录时间',
     updateTime: '上次更新时间',
-    createdTime: '创建时间',
+    createdTime: '创建时间'
   },
-
-
-  permissionQuery:{
-    id:'id',
-    name: '权限名称',
-    remark: '备注'
-  },
-
 
   roleQuery:{
     id:'id',
     name: '角色名称',
     remark: '备注'
   },
+  permissionQuery:{
+    id:'id',
+    name: '权限名称',
+    remark: '备注'
+  },
 
+  groundQuery:{
+    id: 'ID',
+    name: '场地名',
+    type: '种类',
+    isAvailable: '状态',
+    isDeleted: '删除',
+    page: '',
+    size: ''
+  },
 
   charts:{
     title:'近期数据'
@@ -123,7 +132,7 @@ export default {
   },
 
   accountStatus:{
-    available: '正常',
+    available: '可用',
     unavailable: '不可用'
   },
 
@@ -134,7 +143,11 @@ export default {
 
   button:{
     confirm: '确认',
-    cancel: '取消'
+    cancel: '取消',
+    create: '增加',
+    search: '查找',
+    delete: '删除',
+    update: '修改'
   }
 
 };

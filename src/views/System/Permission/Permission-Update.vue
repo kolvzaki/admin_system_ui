@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <el-form v-model="props.p">
-      <el-form-item v-for="o in Object.keys(props.p)" label-width="100px" :label="i18nPermissionQuery(o)">
-        <el-input v-if="o !== 'id'" v-model="props.p[o]"></el-input>
-        <el-input v-else disabled v-model="props.p[o]"></el-input>
+    <el-form v-model="data">
+      <el-form-item v-for="o in Object.keys(data)" label-width="100px" :label="i18nPermissionQuery(o)">
+        <el-input v-if="o !== 'id'" v-model="data[o]"></el-input>
+        <el-input v-else disabled v-model="data[o]"></el-input>
       </el-form-item>
     </el-form>
     <div class="button-contain">
-      <el-button type="primary" :size="componentSize" @click="permissionUpdate(props.p)">
+      <el-button type="primary" :size="componentSize" @click="permissionUpdate(data)">
         {{SysI18n('button.confirm')}}
       </el-button>
       <el-button :size="componentSize" @click="cancelUpdate" >
@@ -22,6 +22,7 @@ import globalHooks from "@/utils/globalHooks";
 import usePermission from "@/views/System/Permission/hooks/usePermission";
 import { IPermission } from "@/views/System/Permission/types/types";
 import {i18nPermissionQuery,SysI18n} from "@/utils/i18n"
+import { reactive } from "vue";
 
 const {componentSize} = globalHooks()
 const {permissionUpdate} = usePermission()
@@ -37,6 +38,8 @@ const props = withDefaults(defineProps<{
     }
   }
 })
+
+const data = reactive(JSON.parse(JSON.stringify(props.p)))
 
 const emit = defineEmits(
   ['cancel']

@@ -1,10 +1,12 @@
 export interface IUser{
+  id: string|number,
   username:string,
   nickname: string,
   gender:  number,
   mobile:string,
   email:string,
-  age: number
+  age: number,
+  role: string|number,
   introduce:string,
   isAvailable: number,
   isDeleted: number,
@@ -20,6 +22,7 @@ export interface queryModel {
   //gender: number;
   isAvailable: number;
   isDeleted: number;
+  role: string;
   page:number,
   size:number
 }

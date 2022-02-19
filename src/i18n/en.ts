@@ -8,6 +8,7 @@ export default {
     systemManage: 'System Manage',
     userManage: 'User',
     roleManage: 'Role',
+    orderManage:'Order',
     permissionManage: 'Permission',
     playGroundManage: 'Ground',
     equipmentManage: 'Equipment',
@@ -81,12 +82,16 @@ export default {
     MoneyData:'Daily Income'
   },
   userQuery:{
-    id:'ID',
+    id:'id',
+    rid: 'rid',
     username: 'Username',
     nickname: 'Nickname',
     gender: 'Gender',
     mobile:'Mobile',
+    avatar: 'Avatar',
     email:'Email',
+    role:'Role',
+    role_name: 'Role',
     minAge:'min age',
     maxAge: 'max age',
     introduce:'introduce',
@@ -95,8 +100,12 @@ export default {
     updateTime: 'Update Time',
     createdTime: 'Created Time',
     isDeleted: 'Exist',
-    password: 'Password',
-    avatar: 'Avatar',
+  },
+
+  roleQuery:{
+    id:'id',
+    name: 'Role Name',
+    remark: 'Remark'
   },
 
   permissionQuery:{
@@ -105,11 +114,16 @@ export default {
     remark: 'Remark'
   },
 
-  roleQuery:{
-    id:'id',
-    name: 'Role Name',
-    remark: 'Remark'
+  groundQuery:{
+    id: 'ID',
+    name: 'Name',
+    type: 'Type',
+    isAvailable: 'Status',
+    isDeleted: 'Exists',
+    page: '',
+    size: ''
   },
+
   charts:{
     title: 'Recent Data'
   },
@@ -122,10 +136,14 @@ export default {
   },
   button:{
     confirm: 'Confirm',
-    cancel: 'Cancle'
+    cancel: 'Cancel',
+    create: 'Create',
+    search: 'Search',
+    delete: 'Delete',
+    update: 'Modify'
   },
   DeleteStatus:{
-    deleted: 'Deleted',
+    deleted: 'Negation',
     exists: 'Running'
   },
 }
