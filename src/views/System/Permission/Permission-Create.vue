@@ -7,7 +7,7 @@
       </el-form-item>
     </el-form>
     <div class="button-contain">
-      <el-button type="primary" :size="componentSize" @click="permissionCreate(model)">
+      <el-button type="primary" :size="componentSize" @click="create">
         {{SysI18n('button.confirm')}}
       </el-button>
       <el-button :size="componentSize" @click="cancelCreate" >
@@ -23,6 +23,11 @@ import usePermission from "@/views/System/Permission/hooks/usePermission";
 import {i18nPermissionQuery,SysI18n} from "@/utils/i18n";
 const {model,permissionCreate} = usePermission()
 const {componentSize} = globalHooks()
+
+const create = () =>{
+  permissionCreate(model)
+  cancelCreate()
+}
 
 const emit = defineEmits(
   ['cancel']

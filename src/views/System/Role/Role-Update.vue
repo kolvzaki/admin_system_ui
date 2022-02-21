@@ -7,7 +7,7 @@
       </el-form-item>
     </el-form>
     <div class="button-contain">
-      <el-button type="primary" :size="componentSize" @click="updateRole(data)">
+      <el-button type="primary" :size="componentSize" @click="update(data)">
         {{SysI18n('button.confirm')}}
       </el-button>
       <el-button :size="componentSize" @click="cancelUpdate" >
@@ -22,6 +22,8 @@ import RoleHooks from "./hooks/useRole";
 import {i18nRoleQuery,SysI18n} from "@/utils/i18n";
 import { reactive, ref } from "vue";
 import { IRole } from "@/views/System/Role/types/types";
+import {updateRole} from "@/api/role"
+import { ElMessage as message } from "element-plus";
 
 const props = withDefaults(defineProps<{
   p:IRole
@@ -38,8 +40,13 @@ const componentSize = ref('mini')
 
 const data = reactive(JSON.parse(JSON.stringify(props.p)))
 
-const updateRole = (data:IRole) =>{
-  console.log(data);
+const update = (data:IRole) =>{
+  updateRole(data).then(res=>{
+    message.success('Update Success!')
+  }).catch(err=>{
+    console.log(err);
+  })
+  cancelUpdate()
 }
 
 const emit = defineEmits(

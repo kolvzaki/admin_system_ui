@@ -7,7 +7,7 @@
       </el-form-item>
     </el-form>
     <div class="button-contain">
-      <el-button type="primary" :size="componentSize" @click="permissionUpdate(data)">
+      <el-button type="primary" :size="componentSize" @click="update">
         {{SysI18n('button.confirm')}}
       </el-button>
       <el-button :size="componentSize" @click="cancelUpdate" >
@@ -44,6 +44,11 @@ const data = reactive(JSON.parse(JSON.stringify(props.p)))
 const emit = defineEmits(
   ['cancel']
 )
+
+const update = async() =>{
+  await permissionUpdate(data)
+  cancelUpdate()
+}
 
 const cancelUpdate = ()=>{
   emit('cancel')

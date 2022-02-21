@@ -1,5 +1,6 @@
 import service from "@/request/request";
 import { IRole, IRoleQuery } from "@/views/System/Role/types/types";
+import { IPermission } from "@/views/System/Permission/types/types";
 
 const api = {
   getRolePermissions: '/role/getRolePermissions',
@@ -7,7 +8,15 @@ const api = {
   queryRole: '/role/getRoles',
   deleteRole: '/role/delete',
   updateRole: '/role/update',
-  getAllRoles: '/role/getAllRoles'
+  getAllRoles: '/role/getAllRoles',
+  distributePermission: '/role/distributePermission'
+}
+
+export const distributePermission = (permissions:IPermission[],rid:number) =>{
+  console.log(permissions);
+  return service.put(api.distributePermission+`/${rid}`,{
+    permissions:permissions
+  })
 }
 
 export const getAllRoles = () => {
@@ -32,7 +41,7 @@ export const deleteRole = (data:IRole) =>{
 
 export const queryRole = (query:IRoleQuery) =>{
   return service.get(api.queryRole,{
-    params:query
+    params: query
   })
 }
 

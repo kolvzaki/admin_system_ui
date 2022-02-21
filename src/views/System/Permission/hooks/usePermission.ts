@@ -50,7 +50,7 @@ export default function(){
   const permissionUpdate = async(model:IPermission) =>{
     await updatePermission(model).then(res=>{
       message.success('Update Success')
-      console.log(res);
+      //console.log(res);
     }).catch(err=>{
       console.log(err);
     })
@@ -60,7 +60,7 @@ export default function(){
   const permissionDelete = async (model:IPermission) =>{
     await deletePermission(model).then(res=>{
       message.success('Delete Success')
-      console.log(res);
+      //console.log(res);
     }).catch(err=>{
       console.log(err);
     })

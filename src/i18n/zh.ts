@@ -113,10 +113,42 @@ export default {
     id: 'ID',
     name: '场地名',
     type: '种类',
-    isAvailable: '状态',
+    pics : '图片',
+    isAvailable: '是否可用',
     isDeleted: '删除',
+    status: '状态',
     page: '',
     size: ''
+  },
+
+  orderQuery:{
+    id: 'id',
+    username: '用户',
+    ground:'场地',
+    status:'订单状态',
+    minTime: '开始时间',
+    maxTime:'截止时间'
+  },
+
+  orderModel:{
+    id: 'id',
+    username: '用户',
+    ground:'场地',
+    status:'订单状态',
+    createdTime: '创建时间'
+  },
+
+  OrderStatus:{
+    unpaid: '未支付',
+    paid: '已支付',
+    running: '进行中',
+    finished: '已结束',
+    cancel: '已取消',
+  },
+
+  groundStatus:{
+    free: '空闲',
+    occupied: '占用'
   },
 
   charts:{

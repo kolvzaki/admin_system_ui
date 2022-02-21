@@ -20,7 +20,7 @@
             ></el-button
             >
             <el-popconfirm
-              @confirm="permissionDelete(scope.row)"
+              @confirm="deletePermission(scope.row)"
               title="Are you sure to delete this permission?" icon="warning">
               <template #reference>
                 <el-button
@@ -78,6 +78,11 @@ const showUpdateDialog = (data:IPermission) =>{
   dialogOption.p = data
 }
 
+const deletePermission = async (data:IPermission) =>{
+  await permissionDelete(data)
+  permissionQuery(query)
+}
+
 const handleSizeChange = (val:number) =>{
   query.size = val
   permissionQuery(query)
@@ -90,7 +95,7 @@ const handlePageChange = (val:number) =>{
 
 const cancelDialog = () =>{
   dialogOption.isShow = false
-  //permissionQuery(query)
+  permissionQuery(query)
 }
 
 
@@ -108,7 +113,7 @@ onMounted(()=>{
   transition: all ease 1s;
 
   .top-contain {
-    @apply w-full h-max flex items-center;
+    @apply  w-full h-max flex flex-row flex-wrap;
     .query-contain {
       @apply w-max h-max flex;
       .query {

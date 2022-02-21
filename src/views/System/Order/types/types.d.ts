@@ -1,12 +1,16 @@
 export interface IOrder{
-  id:number,
+  id:number|string|undefined,
   username: string,
-  ground: number,
+  ground: number|string|undefined,
   status: number,
   createdTime: string
 }
 
-export interface IOrderQuery extends IOrder{
+export interface IOrderQuery {
+  id:number|string|undefined,
+  username: string,
+  ground: number|string|undefined,
+  status: number,
   minTime: string,
   maxTime: string
 }

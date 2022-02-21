@@ -1,7 +1,8 @@
 import { onMounted, ref } from "vue";
 import { IPermission } from "@/views/System/Permission/types/types";
-import { getRolePermissionsService } from "@/api/role";
+import { distributePermission, getRolePermissionsService } from "@/api/role";
 import { getAll } from "@/api/permission";
+import { ElMessage } from "element-plus";
 
 export default function(){
 
@@ -39,6 +40,14 @@ export default function(){
     }
   }
 
+  const permissionDistribute = async (permissions:IPermission[],rid:number) =>{
+    await distributePermission(permissions,rid).then(res=>{
+      ElMessage.success('Distribute Success!')
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+
   onMounted(()=>{
     getAllPermissions()
   })
@@ -51,6 +60,8 @@ export default function(){
 
     initNewPermission,
     getRolePermissions,
-    getAllPermissions
+    getAllPermissions,
+
+    permissionDistribute
   }
 }

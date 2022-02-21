@@ -3,6 +3,7 @@ import { computed, onMounted, reactive, ref } from "vue";
 import globalHooks from "@/utils/globalHooks";
 import { groundQuery,getGroundTypes,groundCreate } from "@/api/playground";
 import { ElMessage as message } from "element-plus";
+import { i18nGroundStatus } from "@/utils/i18n";
 
 export default function(){
 
@@ -15,10 +16,21 @@ export default function(){
   const isInput = (o:string) =>{
     return inputList.indexOf(o) !== -1
   }
-  const optionsList = ['isAvailable','type','isDeleted']
+  const optionsList = ['isAvailable','type','isDeleted','status']
   const isQueryOptions = (o:string) =>{
     return optionsList.indexOf(o) !==-1
   }
+
+  const groundStatusOptions = [
+    {
+      label: i18nGroundStatus('free'),
+      value: 1,
+    },
+    {
+      label: i18nGroundStatus('occupied'),
+      value: 0
+    }
+  ]
 
   const GroundTypes = ():string[] =>{
     let types:string[] = []
@@ -54,12 +66,15 @@ export default function(){
     isAvailable: avaOptions,
     isDeleted:isDeletedOptions,
     type:{},
+    status: groundStatusOptions
   }
 
   const GroundModel:IGround=reactive({
     id: '',
     name: '',
     type: '',
+    pics: '',
+    status: 1,
     isDeleted: 0,
     isAvailable: 1,
   })
@@ -68,6 +83,7 @@ export default function(){
     id: '',
     name: '',
     type: '',
+    status: 1,
     isDeleted: 1,
     isAvailable: 1,
     page: 1,

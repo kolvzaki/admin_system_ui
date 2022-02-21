@@ -1,7 +1,7 @@
 <template>
   <div class="ground-manage-contain">
     <div class="top-contain">
-      <el-form label-width="60px" class="query-form-contain" inline :size="componentSize" v-model="GroundQuery">
+      <el-form label-width="80px" class="query-form-contain" inline :size="componentSize" v-model="GroundQuery">
         <el-form-item v-for="o in Object.keys(GroundQuery)" :label="i18nGroundQuery(o)">
           <el-input v-model="GroundQuery[o]" v-if="isInput(o)" clearable></el-input>
           <el-select v-else-if="isQueryOptions(o)" v-model="GroundQuery[o]" clearable>
@@ -126,7 +126,7 @@ const check = () => {
 .ground-manage-contain {
   @apply w-full h-full overflow-hidden;
   .top-contain {
-    @apply w-max h-max my-2 ;
+    @apply w-full h-max my-2 flex flex-row flex-wrap;
     margin: 0 auto;
   }
 

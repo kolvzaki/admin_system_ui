@@ -161,7 +161,7 @@ const setAvailableStatus = async(data:IUser) => {
   }).catch(err=>{
     console.log(err);
   })
-  queryUser()
+  await queryUser()
 }
 
 const queryUser = async () => {
@@ -174,9 +174,9 @@ const queryUser = async () => {
   });
 };
 
-const cancelDialog = () => {
+const cancelDialog = async() => {
   dialogOption.isShow = false;
-  queryUser();
+  await queryUser();
 };
 
 const inputList = ["username", "email", "mobile"];

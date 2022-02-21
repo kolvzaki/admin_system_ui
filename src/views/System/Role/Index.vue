@@ -4,7 +4,7 @@
       <div class="query-contain">
         <el-input class="query" clearable v-model="query.param" placeholder="Query Role" />
       </div>
-      <el-button type="primary" :size="componentSize" @click="roleQuery">Search</el-button>
+      <el-button type="primary" :size="componentSize" @click="roleQuery(query)">Search</el-button>
       <el-button type="success" :size="componentSize" @click="showCreateDialog">Create</el-button>
     </div>
 
@@ -103,13 +103,13 @@ const { componentSize, pageSizes, dialogOption } = useGlobalHooks();
 import useRole from "@/views/System/Role/hooks/useRole";
 
 const { query, tableData, total, roleQuery, roleDelete } = useRole();
-
 import useRolePermission from "@/views/System/Role/hooks/useRolePermission";
 import { IPermission } from "@/views/System/Permission/types/types";
 
+
 const {
   allPermissions, RolePermissions, showRolePermission, newPermission,
-  getRolePermissions, getAllPermissions, initNewPermission
+  getRolePermissions, getAllPermissions, initNewPermission,permissionDistribute
 } = useRolePermission();
 
 const showCreateDialog = () => {
@@ -132,8 +132,11 @@ const cancelDialog = () => {
 
 const switchRole = (row: IRole) => {
   showRolePermission.value = true;
+  selectedRole.value = row.id
   getRolePermissions(row.id);
 };
+
+const selectedRole = ref(0)
 
 const handleSizeChange = (val: number) => {
   query.size = val;
@@ -179,9 +182,9 @@ const handleClose = (id: string | number) => {
   });
 };
 
-//TODO: Save Role's Permissions while push Save Button.
+
 const saveRolePermission = () => {
-  message.success("Save success");
+  permissionDistribute(RolePermissions.value,selectedRole.value)
 };
 
 </script>

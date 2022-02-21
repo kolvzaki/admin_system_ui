@@ -49,45 +49,45 @@ watchSwitchLang(() => {
   });
 });
 
-onMounted(()=>{
+onMounted(() => {
 
-})
+});
 
 </script>
 
 <template>
-    <el-container class="app-container">
-      <el-aside class="app-sidebar" :width="appStore.isCollapse?'60px':'220px'">
-        <sidebar></sidebar>
-      </el-aside>
+  <el-container class="app-container">
+    <el-aside class="app-sidebar" :width="appStore.isCollapse?'60px':'220px'">
+      <sidebar></sidebar>
+    </el-aside>
 
-      <el-container class="app-content">
-        <el-header class="app-header">
-          <navbar></navbar>
-        </el-header>
+    <el-container class="app-content">
+      <el-header class="app-header">
+        <navbar></navbar>
+      </el-header>
 
-        <app-tabs class="app-tags">
+      <app-tabs class="app-tags">
 
-        </app-tabs>
+      </app-tabs>
 
-        <el-main class="pageview">
-          <el-scrollbar>
-            <router-view v-slot="{Component,route}">
-              <keep-alive>
-                <transition name="appAnime" mode="out-in">
-                  <component :is="Component" :key="route.path"></component>
-                </transition>
-              </keep-alive>
-            </router-view>
-          </el-scrollbar>
-        </el-main>
+      <el-main class="pageview">
+        <el-scrollbar>
+          <router-view v-slot="{Component,route}">
+            <keep-alive>
+              <transition name="appAnime" mode="out-in">
+                <component :is="Component" :key="route.path"></component>
+              </transition>
+            </keep-alive>
+          </router-view>
+        </el-scrollbar>
+      </el-main>
 
 
-      </el-container>
-      <el-container v-show="appStore.getShowSettings">
-        <setting />
-      </el-container>
     </el-container>
+    <el-container v-show="appStore.getShowSettings">
+      <setting />
+    </el-container>
+  </el-container>
 
 </template>
 

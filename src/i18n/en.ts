@@ -118,11 +118,45 @@ export default {
     id: 'ID',
     name: 'Name',
     type: 'Type',
-    isAvailable: 'Status',
+    isAvailable: 'Available',
     isDeleted: 'Exists',
+    pics : 'Pics',
+    status: 'Status',
     page: '',
     size: ''
   },
+
+  orderQuery:{
+    id: 'id',
+    username: 'User',
+    ground:'Ground',
+    status:'Order Status',
+    minTime: 'Started Time',
+    maxTime:'End Time'
+  },
+
+  orderModel:{
+    id: 'id',
+    username: 'User',
+    ground:'Ground',
+    status:'Order Status',
+    createdTime: 'Created Time'
+  },
+
+  OrderStatus:{
+    unpaid: 'Unpaid',
+    paid: 'Paid',
+    running: 'Running',
+    finished: 'Finished',
+    cancel: 'Cancel',
+  },
+
+  groundStatus:{
+    free: 'free',
+    occupied: 'occupied'
+  },
+
+
 
   charts:{
     title: 'Recent Data'

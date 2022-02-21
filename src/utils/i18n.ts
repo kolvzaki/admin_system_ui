@@ -94,6 +94,21 @@ export function i18nPermissionQuery(v:string):string{
   return i18n.global.t('msg.permissionQuery.' + v)
 }
 
+export function i18nOrderQuery(v:string):string{
+  return i18n.global.t('msg.orderQuery.'+v)
+}
+
+export function i18nOrderModel(v:string):string{
+  return i18n.global.t('msg.orderModel.'+v)
+}
+
+export function i18nOrderStatus(v:string):string{
+  return i18n.global.t('msg.OrderStatus.'+v);
+}
+
+export function i18nGroundStatus(v:string):string{
+  return i18n.global.t('msg.groundStatus.'+v);
+}
 
 export function watchSwitchLang(...cbs:any){
 

@@ -3,6 +3,7 @@ import { createRole, deleteRole, queryRole, updateRole } from "@/api/role";
 import { IRole, IRoleQuery } from "@/views/System/Role/types/types";
 import useRolePermission from "@/views/System/Role/hooks/useRolePermission";
 import { ElMessage as message } from "element-plus";
+import { IPermission } from "@/views/System/Permission/types/types";
 
 export default function() {
 
@@ -40,7 +41,6 @@ export default function() {
     await deleteRole(data).then(res => {
       console.log(res);
       message.success("Delete success");
-      roleQuery(query)
     }).catch(err => {
       console.log(err);
     });
@@ -64,6 +64,7 @@ export default function() {
     });
   };
 
+
   return {
     RoleModel,
     query,
@@ -73,7 +74,8 @@ export default function() {
     roleQuery,
     roleDelete,
     roleUpdate,
-    roleCreate
+    roleCreate,
+
   };
 
 }

@@ -24,7 +24,7 @@ export const createPermission = (data:IPermission) =>{
 }
 
 export const updatePermission = (data:IPermission) =>{
-  return service.put(api.updatePermission,data)
+  return service.put(api.updatePermission+`/${data.id}`,data)
 }
 
 export const deletePermission = (data:IPermission) =>{
