@@ -66,10 +66,17 @@ export default function(){
 
   const dialogOption:IDialog = reactive({
     isShow: false,
-    view: markRaw(defineAsyncComponent(()=>import('@/views/Exception/403/Index.vue'))),
+    view: markRaw(defineAsyncComponent(()=>import('@/views/Exception/404/Index.vue'))),
     title: '404',
     p: undefined,
   })
+
+  const initDialogOption = () =>{
+    dialogOption.isShow = false
+    dialogOption.view =markRaw(defineAsyncComponent(()=>import('@/views/Exception/404/Index.vue')))
+    dialogOption.title = ''
+    dialogOption.p = undefined
+  }
 
   return {
     dateFormat,
@@ -83,5 +90,6 @@ export default function(){
     pageSizes,
     dialogOption,
     setComponentSize,
+    initDialogOption,
   }
 }

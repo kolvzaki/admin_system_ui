@@ -6,6 +6,9 @@
         <el-tag v-else-if="o === 'isDeleted'" type="danger">
           {{ i18nDeleteStatus("deleted") }}
         </el-tag>
+        <el-tag v-else-if="o === 'status'" type="success">
+          {{ i18nGroundStatus("free") }}
+        </el-tag>
         <el-switch v-else-if="o === 'isAvailable'"
                    active-color="#13ce66" inactive-color="#ff4949"
                    :active-value="1" :inactive-value="0"
@@ -29,14 +32,14 @@
 <script lang="ts" setup>
 import useGround from "@/views/System/Playground/hooks/useGround";
 import globalHooks from "@/utils/globalHooks";
-import { i18nGroundQuery,SysI18n,i18nDeleteStatus } from "@/utils/i18n";
+import { i18nGroundQuery,SysI18n,i18nDeleteStatus,i18nGroundStatus } from "@/utils/i18n";
 import { IGround } from "@/views/System/Playground/types/types";
 
 const {componentSize} = globalHooks()
 const {GroundModel,createGround} = useGround()
 
-const create = (data:IGround) => {
-  createGround(data)
+const create = async (data:IGround) => {
+  await createGround(data)
   cancelCreate()
 }
 

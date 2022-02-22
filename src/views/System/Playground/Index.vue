@@ -32,11 +32,14 @@
             <el-tag v-else-if="o === 'isDeleted'" :type=" scope.row.isDeleted === 1?'success':'danger' ">
               {{ i18nDeleteStatus(scope.row.isDeleted === 1 ? "exists" : "deleted") }}
             </el-tag>
-            <el-switch v-else
+            <el-switch v-else-if="o ==='isAvailable'"
                        v-model="scope.row.isAvailable"
                        active-color="#13ce66" inactive-color="#ff4949"
                        :active-value="1" :inactive-value="0"
             ></el-switch>
+            <el-tag v-else-if="o === 'status'" :type=" scope.row.status === 1?'success':'danger' ">
+              {{ i18nGroundStatus(scope.row.status === 1 ? "free" : "occupied") }}
+            </el-tag>
           </template>
         </el-table-column>
 
@@ -76,7 +79,7 @@
 <script setup lang="ts">
 import globalHooks from "@/utils/globalHooks";
 import useGround from "@/views/System/Playground/hooks/useGround";
-import { i18nGroundQuery, SysI18n, i18nAccountStatus, i18nDeleteStatus } from "@/utils/i18n";
+import { i18nGroundQuery, SysI18n, i18nAccountStatus, i18nDeleteStatus,i18nGroundStatus } from "@/utils/i18n";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import { defineAsyncComponent, markRaw, onMounted } from "vue";
 import SysDialog from "@/components/common/SysDialog.vue";
@@ -104,6 +107,7 @@ const showUpdateDialog = (data:IGround) =>{
 
 const cancelDialog = () =>{
   dialogOption.isShow = false
+  queryGround(GroundQuery);
 }
 
 const handleSizeChange = (val: number) => {

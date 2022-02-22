@@ -44,6 +44,8 @@ const props = withDefaults(defineProps<{
       id: "",
       name: "",
       type: "",
+      pics:"",
+      status: 0,
       isAvailable: 1,
       isDeleted: 0
     };

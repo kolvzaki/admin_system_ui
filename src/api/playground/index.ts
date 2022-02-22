@@ -3,7 +3,7 @@ import { IGround, IGroundQuery } from "@/views/System/Playground/types/types";
 
 
 const api = {
-  queryGround: '/ground/queryGround',
+  queryGround: '/ground/queryGrounds',
   createGround: '/ground/create',
   updateGround: '/ground/update',
   deleteGround: '/ground/delete',
