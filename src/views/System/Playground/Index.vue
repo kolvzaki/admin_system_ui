@@ -34,6 +34,7 @@
             </el-tag>
             <el-switch v-else-if="o ==='isAvailable'"
                        v-model="scope.row.isAvailable"
+                       @change="groundDisable(scope.row,scope.row.isAvailable)"
                        active-color="#13ce66" inactive-color="#ff4949"
                        :active-value="1" :inactive-value="0"
             ></el-switch>
@@ -47,12 +48,24 @@
           <template #default="scope">
             <el-button :size="componentSize" icon="refresh" @click="showUpdateDialog(scope.row)" />
             <el-popconfirm
+              v-if="scope.row.isDeleted === 1"
+              @confirm="deleteGround(scope.row,0)"
               title="Are you sure to delete this Playground?" icon="warning">
               <template #reference>
                 <el-button
                   :size="componentSize"
                   icon="delete"
                   type="danger" />
+              </template>
+            </el-popconfirm>
+            <el-popconfirm
+              v-else
+              @confirm="deleteGround(scope.row,1)"
+              title="Are you sure to restore this Playground?" icon="warning">>
+              <template #reference>
+                <el-button
+                  :size="componentSize" icon="check"
+                  type="success" />
               </template>
             </el-popconfirm>
           </template>
@@ -86,7 +99,7 @@ import SysDialog from "@/components/common/SysDialog.vue";
 import { IGround } from "@/views/System/Playground/types/types";
 
 const { componentSize, isDeletedOptions, avaOptions, pageSizes, dialogOption } = globalHooks();
-const { GroundModel, GroundQuery, isQueryOptions, isInput, queryOption, tableData, total, queryGround } = useGround();
+const { GroundModel, GroundQuery, isQueryOptions, isInput, queryOption, tableData, total, queryGround,deleteGround,groundDisable } = useGround();
 
 onMounted(async () => {
   await queryGround(GroundQuery);
@@ -105,9 +118,9 @@ const showUpdateDialog = (data:IGround) =>{
   dialogOption.p = data
 }
 
-const cancelDialog = () =>{
+const cancelDialog = async() =>{
   dialogOption.isShow = false
-  queryGround(GroundQuery);
+  await queryGround(GroundQuery);
 }
 
 const handleSizeChange = (val: number) => {

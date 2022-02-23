@@ -7,7 +7,16 @@ const api = {
   createGround: '/ground/create',
   updateGround: '/ground/update',
   deleteGround: '/ground/delete',
-  getGroundTypes: '/ground/types'
+  getGroundTypes: '/ground/types',
+  disableGround: '/ground/disable'
+}
+
+export const disableGround = (data:IGround,param:number) =>{
+  return service.get(api.disableGround+`/${data.id}`,{
+    params:{
+      isAvailable: param
+    }
+  })
 }
 
 export const groundQuery = (query:IGroundQuery) =>{
@@ -24,8 +33,12 @@ export const groundUpdate = (data:IGround) =>{
   return service.put(api.updateGround+`/${data.id}`,data)
 }
 
-export const groundDelete = (data:IGround) => {
-  return service.delete(api.deleteGround + `/${data.id}`)
+export const groundDelete = (data:IGround,param:number) => {
+  return service.delete(api.deleteGround + `/${data.id}`,{
+    params:{
+      isDeleted: param
+    }
+  })
 }
 
 export const getGroundTypes = () => {

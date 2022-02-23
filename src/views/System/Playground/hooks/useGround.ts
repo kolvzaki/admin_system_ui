@@ -1,9 +1,10 @@
 import { IGround, IGroundQuery } from "@/views/System/Playground/types/types";
 import { computed, onMounted, reactive, ref } from "vue";
 import globalHooks from "@/utils/globalHooks";
-import { groundQuery, getGroundTypes, groundCreate } from "@/api/playground";
+import { groundQuery, getGroundTypes, groundCreate, groundDelete, disableGround } from "@/api/playground";
 import { ElMessage as message } from "element-plus";
 import { i18nGroundStatus } from "@/utils/i18n";
+
 
 
 export default function() {
@@ -74,6 +75,7 @@ export default function() {
     name: "",
     type: "",
     pics: "",
+    cost: 0,
     status: 1,
     isDeleted: 0,
     isAvailable: 1
@@ -93,7 +95,6 @@ export default function() {
 
   const queryGround = (query: IGroundQuery) => {
     groundQuery(query).then(res => {
-      message.success("Query Success");
       const { data } = res;
       total.value = data.total;
       tableData.value = data.list;
@@ -105,7 +106,7 @@ export default function() {
 
   const createGround = async (data: IGround) => {
     groundCreate(data).then(res => {
-      console.log(res);
+      //console.log(res);
       message.success("Create Success");
       initModel();
     }).catch(err => {
@@ -113,10 +114,24 @@ export default function() {
     });
   };
 
-  const deleteGround = (param: number | string) => {
-
-    //queryGround(GroundQuery);
+  const deleteGround = async (data:IGround,param:number) => {
+    await groundDelete(data,param).then(res=>{
+      message.success('Delete Success')
+      //console.log(res);
+    }).then(err=>{
+      console.log(err);
+    })
+    queryGround(GroundQuery);
   };
+
+  const groundDisable = async (data:IGround,param:number) =>{
+    await disableGround(data,param).then(res=>{
+      message.success('Status Change Success')
+    }).then(err=>{
+      console.log(err);
+    })
+    queryGround(GroundQuery);
+  }
 
   const updateGround = (data: IGround) => {
 
@@ -134,10 +149,12 @@ export default function() {
     createGround,
     deleteGround,
     updateGround,
+    groundDisable,
 
 
     isQueryOptions,
-    isInput
+    isInput,
+    getGroundTypeOptions,
 
   };
 

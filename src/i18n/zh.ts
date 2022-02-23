@@ -114,6 +114,7 @@ export default {
     name: '场地名',
     type: '种类',
     pics : '图片',
+    cost: '价格',
     isAvailable: '是否可用',
     isDeleted: '删除',
     status: '状态',

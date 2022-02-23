@@ -118,6 +118,7 @@ export default {
     id: 'ID',
     name: 'Name',
     type: 'Type',
+    cost: 'Cost',
     isAvailable: 'Available',
     isDeleted: 'Exists',
     pics : 'Pics',
