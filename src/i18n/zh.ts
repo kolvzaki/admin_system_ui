@@ -110,7 +110,7 @@ export default {
   },
 
   groundQuery:{
-    id: 'ID',
+    id: '场地ID',
     name: '场地名',
     type: '种类',
     pics : '图片',
@@ -125,18 +125,28 @@ export default {
   orderQuery:{
     id: 'id',
     username: '用户',
-    ground:'场地',
+    gid:'场地ID',
+    name: '场地名称',
+    type: '场地种类',
+    orderDate: '预约日期',
+    orderTime: '预约时间',
     status:'订单状态',
-    minTime: '开始时间',
-    maxTime:'截止时间'
+    score: '评分',
+    page: '',
+    size: '',
   },
 
   orderModel:{
     id: 'id',
     username: '用户',
-    ground:'场地',
+    gid: '场地ID',
+    name:'场地',
+    type: '场地种类',
     status:'订单状态',
-    createdTime: '创建时间'
+    createdTime: '创建时间',
+    orderTime: '预约时间',
+    cost: '支付金额(RMB)',
+    score: '用户评分'
   },
 
   OrderStatus:{
@@ -145,6 +155,11 @@ export default {
     running: '进行中',
     finished: '已结束',
     cancel: '已取消',
+  },
+
+  OrderDetail:{
+    title: '订单详情',
+    orderId: '订单编号: '
   },
 
   groundStatus:{
@@ -177,10 +192,13 @@ export default {
   button:{
     confirm: '确认',
     cancel: '取消',
+    close: '关闭',
     create: '增加',
     search: '查找',
     delete: '删除',
-    update: '修改'
+    update: '修改',
+    fold: '折叠',
+    unfold:'展开'
   }
 
 };

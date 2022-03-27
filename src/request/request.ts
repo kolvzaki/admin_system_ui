@@ -42,12 +42,13 @@ service.interceptors.request.use(
 );
 
 service.interceptors.response.use(
-  (response:AxiosResponse<SysResponse>) =>{
+  async(response:AxiosResponse<SysResponse>) =>{
     const res = response.data
     reload.close()
     if(res.code !== 200){
       if (res.code === 401){
-        router.push('/login')
+        Session.clearAll()
+        await router.replace('/login')
       }
       message.error(res.code + ": " + res.message)
 

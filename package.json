@@ -12,6 +12,7 @@
     "@element-plus/icons-vue": "^0.2.4",
     "@iconify/iconify": "^2.1.0",
     "@iconify/vue": "^3.1.1",
+    "@types/lodash": "^4.14.180",
     "@types/path-browserify": "^1.0.0",
     "@vueuse/core": "^7.6.1",
     "animate.css": "^4.1.1",

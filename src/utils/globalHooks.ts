@@ -4,7 +4,7 @@ import { IDialog } from "@/interfaces/modules/global";
 import { i18nAccountStatus, i18nDeleteStatus, i18nGender, watchSwitchLang } from "@/utils/i18n";
 
 export default function(){
-  const dateFormat = "YYYY/MM/D HH:mm:ss z";
+  const dateFormat = "YYYY-MM-DD HH:mm:ss z";
 
   watchSwitchLang(() => {
     avaOptions.forEach(item=>{
@@ -50,8 +50,12 @@ export default function(){
     return p === 1 ? 'primary':'danger'
   }
 
-  const formatDate = (v:string):string =>{
+  const formatDate = (v:any):string =>{
     return moment(v).format(dateFormat)
+  }
+
+  const formatOrderDate = (v:any) => {
+    return moment(v).format('YYYY-MM-DD')
   }
 
   const componentSizeOptions = [
@@ -81,6 +85,8 @@ export default function(){
   return {
     dateFormat,
     formatDate,
+    formatOrderDate,
+
     genderOptions,
     avaOptions,
     isDeletedOptions,

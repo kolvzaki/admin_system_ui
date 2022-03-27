@@ -1,16 +1,33 @@
 export interface IOrder{
   id:number|string|undefined,
+  uid: number,
   username: string,
-  ground: number|string|undefined,
+  nickname: string,
+  credit: number,
+  mobile: string,
+  email: string,
+  gid: number,
+  name: string,
+  type: string
+  cost: number,
+  orderDate: any,
+  orderTime : string,
+  score: number,
+  content: string,
   status: number,
-  createdTime: string
+  createdTime: any
 }
 
 export interface IOrderQuery {
+  page:number,
+  size:number,
   id:number|string|undefined,
   username: string,
-  ground: number|string|undefined,
+  gid: number|string,
+  name: string,
+  type: string,
   status: number,
-  minTime: string,
-  maxTime: string
+  score: number|string,
+  orderDate: any,
+  orderTime: string,
 }

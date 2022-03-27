@@ -1,57 +1,56 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 // @ts-ignore
-import path from 'path'
+import path from "path";
 
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
-import PurgeIcons from 'vite-plugin-purge-icons'
-import {loadEnv} from "vite";
+import PurgeIcons from "vite-plugin-purge-icons";
+import { loadEnv } from "vite";
 
 
-
-const resolver = (p:string)=>{
-  return path.resolve(__dirname,p);
-}
+const resolver = (p: string) => {
+  return path.resolve(__dirname, p);
+};
 
 // https://vitejs.dev/config/ 按需引入插件
 
 export default defineConfig({
   plugins: [
-      vue(),
+    vue(),
 
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()]
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()]
     }),
     PurgeIcons({
-        content:[
-            '**/*.html',
-            '**/*.js',
-            '**/*.vue'
-        ],
-    }),
+      content: [
+        "**/*.html",
+        "**/*.js",
+        "**/*.vue"
+      ]
+    })
   ],
 
-  server:{
+  server: {
     strictPort: true,
     port: 8989,
     open: true,
-    proxy:{
-      '/api':{
-        target: 'http://localhost:8888',
-        changeOrigin: true,
+    proxy: {
+      "/v1/api": {
+        target: "http://localhost:8888",
+        changeOrigin: true
       }
     }
   },
-  resolve:{
-    alias:{
-      '@': resolver('./src')
+  resolve: {
+    alias: {
+      "@": resolver("./src")
     }
-  },
+  }
 
-})
+});

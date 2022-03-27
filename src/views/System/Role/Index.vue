@@ -125,9 +125,9 @@ const showUpdateDialog = (data: IRole) => {
   dialogOption.p = data;
 };
 
-const cancelDialog = () => {
+const cancelDialog = async() => {
   dialogOption.isShow = false;
-  roleQuery(query)
+  await roleQuery(query)
 };
 
 const switchRole = (row: IRole) => {

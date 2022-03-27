@@ -115,7 +115,7 @@ export default {
   },
 
   groundQuery:{
-    id: 'ID',
+    id: 'Ground ID',
     name: 'Name',
     type: 'Type',
     cost: 'Cost',
@@ -130,18 +130,29 @@ export default {
   orderQuery:{
     id: 'id',
     username: 'User',
-    ground:'Ground',
+    gid:'Ground ID',
+    name: 'Ground Name',
+    type: 'Ground Type',
+    orderDate: 'Order Date',
+    orderTime: 'Order Time',
     status:'Order Status',
-    minTime: 'Started Time',
-    maxTime:'End Time'
+    page: '',
+    size: '',
   },
 
   orderModel:{
     id: 'id',
     username: 'User',
     ground:'Ground',
+    gid: 'Ground ID',
+    name:'Ground',
+    type: 'Ground Type',
+    groundId: 'Ground Id',
+    score: 'Score',
+    orderTime: 'Order Time',
     status:'Order Status',
-    createdTime: 'Created Time'
+    createdTime: 'Created Time',
+    cost: 'Cost(RMB)',
   },
 
   OrderStatus:{
@@ -150,6 +161,11 @@ export default {
     running: 'Running',
     finished: 'Finished',
     cancel: 'Cancel',
+  },
+
+  OrderDetail:{
+    title: 'Order Detail',
+    orderId: 'Order ID: ',
   },
 
   groundStatus:{
@@ -172,10 +188,13 @@ export default {
   button:{
     confirm: 'Confirm',
     cancel: 'Cancel',
+    close: 'Close',
     create: 'Create',
     search: 'Search',
     delete: 'Delete',
-    update: 'Modify'
+    update: 'Modify',
+    fold: 'Fold',
+    unfold:'Unfold'
   },
   DeleteStatus:{
     deleted: 'Negation',

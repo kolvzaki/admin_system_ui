@@ -1,10 +1,10 @@
 import { IGround, IGroundQuery } from "@/views/System/Playground/types/types";
 import { computed, onMounted, reactive, ref } from "vue";
 import globalHooks from "@/utils/globalHooks";
-import { groundQuery, getGroundTypes, groundCreate, groundDelete, disableGround } from "@/api/playground";
+import { groundQuery, getGroundTypes, groundCreate, groundDelete, disableGround, groundUpdate } from "@/api/playground";
 import { ElMessage as message } from "element-plus";
 import { i18nGroundStatus } from "@/utils/i18n";
-
+import { SysResponse } from "@/request/request";
 
 
 export default function() {
@@ -104,7 +104,7 @@ export default function() {
     });
   };
 
-  const createGround = async (data: IGround) => {
+  const createGround = (data: IGround) => {
     groundCreate(data).then(res => {
       //console.log(res);
       message.success("Create Success");
@@ -114,27 +114,32 @@ export default function() {
     });
   };
 
-  const deleteGround = async (data:IGround,param:number) => {
-    await groundDelete(data,param).then(res=>{
-      message.success('Delete Success')
+  const deleteGround = async (data: IGround, param: number) => {
+    groundDelete(data, param).then(res => {
+      message.success("Delete Success");
       //console.log(res);
-    }).then(err=>{
+    }).then(err => {
       console.log(err);
-    })
-    queryGround(GroundQuery);
+    });
+    await queryGround(GroundQuery);
   };
 
-  const groundDisable = async (data:IGround,param:number) =>{
-    await disableGround(data,param).then(res=>{
-      message.success('Status Change Success')
-    }).then(err=>{
+  const groundDisable = async (data: IGround, param: number) => {
+    disableGround(data, param).then(res => {
+      message.success("Status Change Success");
+    }).then(err => {
+      console.log(err);
+    });
+    await queryGround(GroundQuery);
+  };
+
+  const updateGround = async(data: IGround) => {
+    groundUpdate(data).then((res) => {
+      message.success("Ground Update Success");
+    }).catch(err=>{
       console.log(err);
     })
-    queryGround(GroundQuery);
-  }
-
-  const updateGround = (data: IGround) => {
-
+    await queryGround(GroundQuery)
   };
 
 
@@ -154,7 +159,7 @@ export default function() {
 
     isQueryOptions,
     isInput,
-    getGroundTypeOptions,
+    getGroundTypeOptions
 
   };
 

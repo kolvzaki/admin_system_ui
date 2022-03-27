@@ -97,11 +97,17 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 import { defineAsyncComponent, markRaw, onMounted } from "vue";
 import SysDialog from "@/components/common/SysDialog.vue";
 import { IGround } from "@/views/System/Playground/types/types";
+import { useRoute } from "vue-router";
 
 const { componentSize, isDeletedOptions, avaOptions, pageSizes, dialogOption } = globalHooks();
 const { GroundModel, GroundQuery, isQueryOptions, isInput, queryOption, tableData, total, queryGround,deleteGround,groundDisable } = useGround();
+const route = useRoute()
+
 
 onMounted(async () => {
+  if(route.query.gid){
+    GroundQuery.id = Number(route.query.gid)
+  }
   await queryGround(GroundQuery);
 });
 
@@ -118,9 +124,9 @@ const showUpdateDialog = (data:IGround) =>{
   dialogOption.p = data
 }
 
-const cancelDialog = async() =>{
+const cancelDialog = () =>{
   dialogOption.isShow = false
-  await queryGround(GroundQuery);
+  queryGround(GroundQuery);
 }
 
 const handleSizeChange = (val: number) => {

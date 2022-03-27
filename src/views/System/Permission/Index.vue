@@ -93,9 +93,9 @@ const handlePageChange = (val:number) =>{
   permissionQuery(query)
 }
 
-const cancelDialog = () =>{
+const cancelDialog = async() =>{
   dialogOption.isShow = false
-  permissionQuery(query)
+  await permissionQuery(query)
 }
 
 

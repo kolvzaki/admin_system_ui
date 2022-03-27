@@ -23,7 +23,7 @@
 import useAppStore from "../../store/modules/useAppStore";
 import { useRoute } from "vue-router";
 import SvgIcon from "./SvgIcon.vue";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import ContextMenu from "@/components/common/ContextMenu.vue";
 
 const route = useRoute()
@@ -62,6 +62,8 @@ watch(menuVisible,val=>{
     document.body.removeEventListener('click',closeMenu)
   }
 })
+
+
 
 </script>
 

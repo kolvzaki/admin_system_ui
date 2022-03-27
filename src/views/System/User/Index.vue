@@ -86,17 +86,15 @@
 
 
     <sys-dialog :is-show="dialogOption.isShow" :title="dialogOption.title" :view="dialogOption.view" :p="dialogOption.p"
-                @cancelDialog="cancelDialog"></sys-dialog>
+                @cancelDialog="cancelDialog"/>
+
+
 
   </div>
 </template>
 
 <script setup lang="ts">
-
-//TODO:Add a Role Column in form.
-
 import useModel from "./hooks/useModel";
-
 import { i18nGender, i18nProfile, i18nUserQuery, i18nDeleteStatus, SysI18n, watchSwitchLang } from "@/utils/i18n";
 import { defineAsyncComponent, onMounted, ref, markRaw, computed, watch, reactive } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
@@ -105,13 +103,18 @@ import SysDialog from "@/components/common/SysDialog.vue";
 import globalHooks from "@/utils/globalHooks";
 import { IUser } from "@/views/System/User/types/types";
 import { ElMessage as message } from "element-plus";
+import { useRoute } from "vue-router";
 
 const { formatDate, pageSizes, dialogOption, componentSize } = globalHooks();
 
 const { tableData, total, query, queryOptions } = useModel();
 
+const route = useRoute()
 
 onMounted(async () => {
+  if(route.query.username){
+    query.username = String(route.query.username)
+  }
   await getUsers(query).then(res => {
     const { data } = res;
     tableData.value = data.list;
@@ -119,6 +122,7 @@ onMounted(async () => {
     //console.log(res.data);
   }).catch(err => {
     console.log(err);
+    message.error(err)
   });
 });
 
@@ -194,14 +198,14 @@ const isPage = (o: string) => {
 };
 
 
-const handleSizeChange = (val: number) => {
+const handleSizeChange = async(val: number) => {
   query.size = val;
-  queryUser();
+  await queryUser();
 };
 
-const handlePageChange = (val: number) => {
+const handlePageChange = async(val: number) => {
   query.page = val;
-  queryUser();
+  await queryUser();
 };
 
 
